@@ -1,0 +1,4 @@
+Micro-NVSwitch router_top  |  ASAP7 RVT TT  |  clk 2500 ps  |  parasitics: groute
+Setup WNS    74.20 ps   TNS       0.00 ps
+Hold  WNS   -15.37 ps   TNS   -3057.44 ps
+Achievable Fmax ~ 412 MHz

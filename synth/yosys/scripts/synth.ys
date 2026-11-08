@@ -1,0 +1,26 @@
+# ==============================================================================
+# Project Micro-NVSwitch: Rubin-Class High-Radix NoC Router for AI Fabrics
+# File: synth.ys
+# Description: Yosys Synthesis Script for router_top
+# ==============================================================================
+
+# Read Verilog sources
+read_verilog -I../../rtl/include ../../rtl/include/router_pkg.v
+read_verilog -I../../rtl/include ../../rtl/blocks/vc_buffer.v
+read_verilog -I../../rtl/include ../../rtl/blocks/islip_arbiter.v
+read_verilog -I../../rtl/include ../../rtl/blocks/crossbar_8x8.v
+read_verilog -I../../rtl/include ../../rtl/blocks/sharp_alu.v
+read_verilog -I../../rtl/include ../../rtl/top/router_top.v
+
+# Elaborate hierarchy
+hierarchy -check -top router_top
+
+# High-Level Synthesis
+synth -top router_top
+
+# Output reports and gate-level netlists
+tee -o ../yosys/reports/synth_stat.rpt stat
+tee -o ../yosys/reports/synth_check.rpt check
+
+write_verilog -noattr ../yosys/mapped/router_top_synth.v
+write_json ../yosys/mapped/router_top_synth.json

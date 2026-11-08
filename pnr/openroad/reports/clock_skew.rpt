@@ -1,0 +1,11 @@
+Clock clk
+ 264.13 source latency _147286_/CLK ^
+-224.24 target latency _177184_/CLK ^
+  40.00 clock uncertainty
+  -1.43 CRPR
+--------------
+  78.46 setup skew
+
+Clock vclk
+No launch/capture paths found.
+

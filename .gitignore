@@ -1,0 +1,22 @@
+# Flow build products (regenerate with flow/run_flow.sh)
+build/
+pnr/openroad/outputs/
+pnr/innovus/db/
+pnr/innovus/outputs/
+synth/yosys/mapped/
+synth/genus/mapped/
+*.odb
+*.spef
+*.guide
+
+# Crash dumps
+core
+core.*
+
+# Simulation
+dv/cocotb/sim_build/
+dv/cocotb/results.xml
+__pycache__/
+*.pyc
+*.vcd
+*.vvp

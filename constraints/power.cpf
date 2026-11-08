@@ -1,0 +1,35 @@
+# ==============================================================================
+# Project Micro-NVSwitch: Rubin-Class High-Radix NoC Router for AI Fabrics
+# File: power.cpf
+# Description: Cadence Common Power Format (CPF 2.0)
+#              Defines power domains, power switches, and isolation rules
+#              for Cadence Genus and Innovus low-power implementation.
+# ==============================================================================
+
+set_cpf_version 2.0
+set_hierarchy_separator "/"
+
+# Power Domains
+create_power_domain -name PD_TOP -default
+create_power_domain -name PD_VC_BUFFERS -instances {gen_input_port[*].gen_vc_inst[*].u_vc_buffer}
+
+# Nominal Conditions (ASAP7 7nm FinFET standard: 0.70V VDD)
+create_nominal_condition -name NC_NOMINAL -voltage 0.70
+create_nominal_condition -name NC_OFF     -voltage 0.00
+
+# Power Modes
+create_power_mode -name PM_ACTIVE -domain_conditions {PD_TOP@NC_NOMINAL PD_VC_BUFFERS@NC_NOMINAL} -default
+create_power_mode -name PM_BURST_IDLE -domain_conditions {PD_TOP@NC_NOMINAL PD_VC_BUFFERS@NC_OFF}
+
+# Power Switches
+create_power_switch_rule -name PSR_VC \
+    -domain PD_VC_BUFFERS \
+    -external_power_net VDD \
+    -enable_condition_nominal {!o_vc_idle}
+
+# Isolation Rules
+create_isolation_rule -name ISO_VC_TO_CORE \
+    -from PD_VC_BUFFERS \
+    -to PD_TOP \
+    -isolation_condition {o_vc_idle} \
+    -isolation_output low

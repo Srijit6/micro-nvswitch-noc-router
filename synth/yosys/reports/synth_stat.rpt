@@ -1,0 +1,161 @@
+
+9. Printing statistics.
+
+=== $paramod$7dd6568543981d24ed4b32ed52c9cd479aa74898\crossbar_8x8 ===
+
+   Number of wires:               4440
+   Number of wire bits:           6130
+   Number of public wires:          32
+   Number of public wire bits:    1722
+   Number of ports:                 12
+   Number of port bits:           1138
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               5512
+     $_ANDNOT_                     544
+     $_AND_                          8
+     $_DFF_PN0_                    552
+     $_MUX_                       3864
+     $_NOT_                        544
+
+=== $paramod$a51de729e366ba286e8dae61d01ce1f95bbb9d76\vc_buffer ===
+
+   Number of wires:                946
+   Number of wire bits:           1606
+   Number of public wires:          21
+   Number of public wire bits:     678
+   Number of ports:                 11
+   Number of port bits:            144
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               1536
+     $_ANDNOT_                     486
+     $_AND_                          5
+     $_DFFE_PN0P_                  538
+     $_DFF_PN0_                      1
+     $_MUX_                         66
+     $_NAND_                         7
+     $_NOR_                          2
+     $_NOT_                          3
+     $_ORNOT_                        6
+     $_OR_                         414
+     $_XNOR_                         3
+     $_XOR_                          5
+
+=== $paramod$d1957208a02463975ab3d8884fc6b66e77ce25f8\islip_arbiter ===
+
+   Number of wires:                864
+   Number of wire bits:           1136
+   Number of public wires:          19
+   Number of public wire bits:     291
+   Number of ports:                  6
+   Number of port bits:            162
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                965
+     $_ANDNOT_                     175
+     $_AND_                         48
+     $_DFFE_PN0N_                    2
+     $_DFFE_PN0P_                   10
+     $_DFFE_PN1N_                    1
+     $_DFFE_PN1P_                   11
+     $_MUX_                        351
+     $_NAND_                        47
+     $_NOR_                         24
+     $_NOT_                         50
+     $_ORNOT_                       63
+     $_OR_                         103
+     $_XNOR_                        21
+     $_XOR_                         59
+
+=== router_top ===
+
+   Number of wires:              11871
+   Number of wire bits:          18080
+   Number of public wires:         242
+   Number of public wire bits:    6337
+   Number of ports:                 16
+   Number of port bits:           1395
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:              12856
+     $_ANDNOT_                    6037
+     $_AND_                        178
+     $_DFFE_PN0P_                  372
+     $_DFFE_PN1P_                   40
+     $_MUX_                       2059
+     $_NAND_                       134
+     $_NOR_                        341
+     $_NOT_                        648
+     $_ORNOT_                      554
+     $_OR_                        2194
+     $_XNOR_                       104
+     $_XOR_                        160
+     $paramod$7dd6568543981d24ed4b32ed52c9cd479aa74898\crossbar_8x8      1
+     $paramod$a51de729e366ba286e8dae61d01ce1f95bbb9d76\vc_buffer     32
+     $paramod$d1957208a02463975ab3d8884fc6b66e77ce25f8\islip_arbiter      1
+     sharp_alu                       1
+
+=== sharp_alu ===
+
+   Number of wires:               4749
+   Number of wire bits:           5667
+   Number of public wires:         169
+   Number of public wire bits:    1087
+   Number of ports:                  8
+   Number of port bits:            199
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               4709
+     $_ANDNOT_                    1337
+     $_AND_                         95
+     $_DFFE_PN0P_                   64
+     $_DFF_PN0_                      1
+     $_MUX_                        840
+     $_NAND_                        90
+     $_NOR_                        332
+     $_NOT_                        258
+     $_ORNOT_                      291
+     $_OR_                         931
+     $_XNOR_                       104
+     $_XOR_                        366
+
+=== design hierarchy ===
+
+   router_top                        1
+     $paramod$7dd6568543981d24ed4b32ed52c9cd479aa74898\crossbar_8x8      1
+     $paramod$a51de729e366ba286e8dae61d01ce1f95bbb9d76\vc_buffer     32
+     $paramod$d1957208a02463975ab3d8884fc6b66e77ce25f8\islip_arbiter      1
+     sharp_alu                       1
+
+   Number of wires:              52196
+   Number of wire bits:          82405
+   Number of public wires:        1134
+   Number of public wire bits:   31133
+   Number of ports:                394
+   Number of port bits:           7502
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:              73159
+     $_ANDNOT_                   23645
+     $_AND_                        489
+     $_DFFE_PN0N_                    2
+     $_DFFE_PN0P_                17662
+     $_DFFE_PN1N_                    1
+     $_DFFE_PN1P_                   51
+     $_DFF_PN0_                    585
+     $_MUX_                       9226
+     $_NAND_                       495
+     $_NOR_                        761
+     $_NOT_                       1596
+     $_ORNOT_                     1100
+     $_OR_                       16476
+     $_XNOR_                       325
+     $_XOR_                        745
+

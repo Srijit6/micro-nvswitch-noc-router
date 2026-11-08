@@ -1,0 +1,71 @@
+# ==============================================================================
+# Project Micro-NVSwitch: Rubin-Class High-Radix NoC Router for AI Fabrics
+# File: power.upf
+# Description: IEEE 1801 UPF 3.0 Low-Power Specification
+#              Implements fine-grained power-gating and clock-gating for idle
+#              Virtual Channels, cutting dynamic and leakage power during bursts.
+# ==============================================================================
+
+upf_version 3.0
+
+# ------------------------------------------------------------------------------
+# Power Domains Definition
+# ------------------------------------------------------------------------------
+# Top-level Always-On Domain (Allocators, Crossbar, Downstream Credit Trackers)
+create_power_domain PD_TOP -include_scope
+
+# Switched Virtual Channel Buffer Domains (Power-gated when VCs are idle)
+create_power_domain PD_VC_P0 -elements {gen_input_port[0].gen_vc_inst}
+create_power_domain PD_VC_P1 -elements {gen_input_port[1].gen_vc_inst}
+create_power_domain PD_VC_P2 -elements {gen_input_port[2].gen_vc_inst}
+create_power_domain PD_VC_P3 -elements {gen_input_port[3].gen_vc_inst}
+create_power_domain PD_VC_P4 -elements {gen_input_port[4].gen_vc_inst}
+create_power_domain PD_VC_P5 -elements {gen_input_port[5].gen_vc_inst}
+create_power_domain PD_VC_P6 -elements {gen_input_port[6].gen_vc_inst}
+create_power_domain PD_VC_P7 -elements {gen_input_port[7].gen_vc_inst}
+
+# ------------------------------------------------------------------------------
+# Supply Nets & Ports
+# ------------------------------------------------------------------------------
+create_supply_port VDD
+create_supply_port VSS
+create_supply_net  VDD  -domain PD_TOP
+create_supply_net  VSS  -domain PD_TOP
+
+set_domain_supply_net PD_TOP -primary_power_net VDD -primary_ground_net VSS
+
+# Virtual Supply Nets for Gated VC Buffers
+foreach p {0 1 2 3 4 5 6 7} {
+    create_supply_net VDD_GATED_P${p} -domain PD_VC_P${p}
+    create_supply_net VSS             -domain PD_VC_P${p} -reuse
+    set_domain_supply_net PD_VC_P${p} -primary_power_net VDD_GATED_P${p} -primary_ground_net VSS
+
+    # Power Switches (Header PMOS Switch Array)
+    create_power_switch PSW_P${p} \
+        -domain PD_VC_P${p} \
+        -input_supply_port  {in VDD} \
+        -output_supply_port {out VDD_GATED_P${p}} \
+        -control_port       {pwr_en o_vc_idle[p*4]} \
+        -on_state           {ON in {!pwr_en}}
+}
+
+# ------------------------------------------------------------------------------
+# Isolation Rules: Clamp outputs to zero when VC buffers are powered down
+# ------------------------------------------------------------------------------
+foreach p {0 1 2 3 4 5 6 7} {
+    set_isolation ISO_P${p} \
+        -domain PD_VC_P${p} \
+        -isolation_power_net VDD \
+        -isolation_ground_net VSS \
+        -clamp_value 0 \
+        -applies_to outputs
+}
+
+# ------------------------------------------------------------------------------
+# Power States
+# ------------------------------------------------------------------------------
+add_power_state PD_TOP.primary_power_state \
+    -state FULL_ON {-supply_expr {power == `{FULL_ON, 0.70} && ground == `{FULL_ON, 0.0}}}
+
+add_power_state PD_TOP \
+    -state ACTIVE {-logic_expr {PD_TOP.primary_power_state == FULL_ON}}

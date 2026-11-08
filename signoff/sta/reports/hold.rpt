@@ -1,0 +1,812 @@
+Startpoint: i_flit_vc[11] (input port clocked by vclk)
+Endpoint: _149008_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.00    0.00    0.00   clock vclk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                         50.00   50.00 v input external delay
+     1   12.22   25.28   13.76   63.76 v i_flit_vc[11] (in)
+                                         i_flit_vc[11] (net)
+                 32.87    0.00   63.76 v hold6442/A (BUFx2_ASAP7_75t_R)
+     3   13.98   59.14   43.79  107.55 v hold6442/Y (BUFx2_ASAP7_75t_R)
+                                         net6442 (net)
+                 69.70   13.04  120.59 v _090580_/A (AND3x2_ASAP7_75t_R)
+     2    2.86   14.34   36.12  156.71 v _090580_/Y (AND3x2_ASAP7_75t_R)
+                                         gen_input_port[5].gen_vc_inst[2].u_vc_buffer.wr_en (net)
+                 14.42    0.60  157.31 v hold6449/A (BUFx2_ASAP7_75t_R)
+     1    1.51    9.97   21.85  179.16 v hold6449/Y (BUFx2_ASAP7_75t_R)
+                                         net6449 (net)
+                 10.00    0.28  179.44 v _147877_/B (OA21x2_ASAP7_75t_R)
+     7   25.12  104.13   36.08  215.52 v _147877_/Y (OA21x2_ASAP7_75t_R)
+                                         _057919_ (net)
+                104.18    1.43  216.95 v _147878_/B (XNOR2x2_ASAP7_75t_R)
+     5    4.41   23.90   53.52  270.47 ^ _147878_/Y (XNOR2x2_ASAP7_75t_R)
+                                         _057920_ (net)
+                 23.95    0.64  271.10 ^ _147879_/B (XNOR2x1_ASAP7_75t_R)
+     1    0.52    9.63   11.18  282.29 v _147879_/Y (XNOR2x1_ASAP7_75t_R)
+                                         _057026_ (net)
+                  9.63    0.02  282.31 v _149008_/D (DFFASRHQNx1_ASAP7_75t_R)
+                                282.31   data arrival time
+
+                          0.00    0.00   clock clk (rise edge)
+                        263.77  263.77   clock network delay (propagated)
+                         20.00  283.77   clock uncertainty
+                          0.00  283.77   clock reconvergence pessimism
+                                283.77 ^ _149008_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+                         13.91  297.68   library hold time
+                                297.68   data required time
+-----------------------------------------------------------------------------
+                                297.68   data required time
+                               -282.31   data arrival time
+-----------------------------------------------------------------------------
+                                -15.37   slack (VIOLATED)
+
+
+Startpoint: i_flit_data[109] (input port clocked by vclk)
+Endpoint: _114835_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.00    0.00    0.00   clock vclk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                         50.00   50.00 v input external delay
+     1    2.92    5.89    2.75   52.75 v i_flit_data[109] (in)
+                                         i_flit_data[109] (net)
+                  6.22    0.00   52.75 v hold5270/A (BUFx2_ASAP7_75t_R)
+     1    2.04   11.93   20.01   72.76 v hold5270/Y (BUFx2_ASAP7_75t_R)
+                                         net5270 (net)
+                 11.99    0.47   73.22 v hold5235/A (BUFx2_ASAP7_75t_R)
+     1    2.22   12.53   22.37   95.60 v hold5235/Y (BUFx2_ASAP7_75t_R)
+                                         net5235 (net)
+                 12.59    0.45   96.05 v hold5271/A (BUFx2_ASAP7_75t_R)
+     1    2.23   12.57   22.61  118.66 v hold5271/Y (BUFx2_ASAP7_75t_R)
+                                         net5271 (net)
+                 12.63    0.46  119.12 v hold5197/A (BUFx2_ASAP7_75t_R)
+     1    1.99   11.77   22.13  141.24 v hold5197/Y (BUFx2_ASAP7_75t_R)
+                                         net5197 (net)
+                 11.83    0.47  141.71 v hold5272/A (BUFx2_ASAP7_75t_R)
+     1    2.04   11.97   21.95  163.67 v hold5272/Y (BUFx2_ASAP7_75t_R)
+                                         net5272 (net)
+                 12.04    0.49  164.16 v hold5236/A (BUFx2_ASAP7_75t_R)
+     1    2.24   12.74   22.41  186.57 v hold5236/Y (BUFx2_ASAP7_75t_R)
+                                         net5236 (net)
+                 12.83    0.58  187.15 v hold5273/A (BUFx2_ASAP7_75t_R)
+    32   23.20   96.05   46.95  234.10 v hold5273/Y (BUFx2_ASAP7_75t_R)
+                                         net5273 (net)
+                 98.30    8.24  242.34 v _114274_/A1 (AO21x1_ASAP7_75t_R)
+     1    0.62    8.34   39.38  281.72 v _114274_/Y (AO21x1_ASAP7_75t_R)
+                                         _024021_ (net)
+                  8.34    0.04  281.75 v _114835_/D (DFFASRHQNx1_ASAP7_75t_R)
+                                281.75   data arrival time
+
+                          0.00    0.00   clock clk (rise edge)
+                        260.34  260.34   clock network delay (propagated)
+                         20.00  280.34   clock uncertainty
+                          0.00  280.34   clock reconvergence pessimism
+                                280.34 ^ _114835_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+                         14.10  294.44   library hold time
+                                294.44   data required time
+-----------------------------------------------------------------------------
+                                294.44   data required time
+                               -281.75   data arrival time
+-----------------------------------------------------------------------------
+                                -12.69   slack (VIOLATED)
+
+
+Startpoint: i_flit_valid[4] (input port clocked by vclk)
+Endpoint: _138193_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.00    0.00    0.00   clock vclk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                         50.00   50.00 v input external delay
+     2   23.38   47.48   38.98   88.98 v i_flit_valid[4] (in)
+                                         i_flit_valid[4] (net)
+                104.46    0.00   88.98 v _090573_/C (AND3x1_ASAP7_75t_R)
+     1    0.61    7.85   36.16  125.14 v _090573_/Y (AND3x1_ASAP7_75t_R)
+                                         gen_input_port[4].gen_vc_inst[1].u_vc_buffer.wr_en (net)
+                  7.86    0.06  125.20 v hold5715/A (BUFx2_ASAP7_75t_R)
+     2    1.21    8.83   18.91  144.11 v hold5715/Y (BUFx2_ASAP7_75t_R)
+                                         net5715 (net)
+                  8.84    0.11  144.22 v _137057_/B (OA21x2_ASAP7_75t_R)
+     6   28.41  118.33   37.35  181.57 v _137057_/Y (OA21x2_ASAP7_75t_R)
+                                         _047464_ (net)
+                178.19   47.52  229.08 v _137076_/A2 (AO21x1_ASAP7_75t_R)
+     1    0.60    8.53   45.52  274.61 v _137076_/Y (AO21x1_ASAP7_75t_R)
+                                         _047478_ (net)
+                  8.53    0.06  274.67 v _137077_/B (AND2x2_ASAP7_75t_R)
+     1    0.62    7.04   18.43  293.10 v _137077_/Y (AND2x2_ASAP7_75t_R)
+                                         _046576_ (net)
+                  7.04    0.06  293.15 v _138193_/D (DFFASRHQNx1_ASAP7_75t_R)
+                                293.15   data arrival time
+
+                          0.00    0.00   clock clk (rise edge)
+                        269.50  269.50   clock network delay (propagated)
+                         20.00  289.50   clock uncertainty
+                          0.00  289.50   clock reconvergence pessimism
+                                289.50 ^ _138193_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+                         14.43  303.92   library hold time
+                                303.92   data required time
+-----------------------------------------------------------------------------
+                                303.92   data required time
+                               -293.15   data arrival time
+-----------------------------------------------------------------------------
+                                -10.77   slack (VIOLATED)
+
+
+Startpoint: i_flit_type[9] (input port clocked by vclk)
+Endpoint: _138659_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.00    0.00    0.00   clock vclk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                         50.00   50.00 v input external delay
+     1    3.83    7.70    3.65   53.65 v i_flit_type[9] (in)
+                                         i_flit_type[9] (net)
+                  8.19    0.00   53.65 v hold6381/A (BUFx2_ASAP7_75t_R)
+     1    3.56   17.71   23.34   76.98 v hold6381/Y (BUFx2_ASAP7_75t_R)
+                                         net6381 (net)
+                 18.08    1.40   78.38 v hold6378/A (BUFx2_ASAP7_75t_R)
+     1    3.88   18.97   27.37  105.75 v hold6378/Y (BUFx2_ASAP7_75t_R)
+                                         net6378 (net)
+                 19.38    1.53  107.28 v hold6382/A (BUFx2_ASAP7_75t_R)
+     1    5.00   23.53   29.42  136.71 v hold6382/Y (BUFx2_ASAP7_75t_R)
+                                         net6382 (net)
+                 24.31    2.33  139.04 v wire10783/A (BUFx24_ASAP7_75t_R)
+     1    6.24   10.86   30.57  169.61 v wire10783/Y (BUFx24_ASAP7_75t_R)
+                                         net10783 (net)
+                 14.81    3.68  173.29 v hold6379/A (BUFx2_ASAP7_75t_R)
+    32   30.07  125.89   42.70  216.00 v hold6379/Y (BUFx2_ASAP7_75t_R)
+                                         net6379 (net)
+                154.62   32.28  248.28 v _138120_/A1 (AO21x1_ASAP7_75t_R)
+     1    0.61    8.30   46.71  294.98 v _138120_/Y (AO21x1_ASAP7_75t_R)
+                                         _047042_ (net)
+                  8.30    0.03  295.02 v _138659_/D (DFFASRHQNx1_ASAP7_75t_R)
+                                295.02   data arrival time
+
+                          0.00    0.00   clock clk (rise edge)
+                        270.83  270.83   clock network delay (propagated)
+                         20.00  290.83   clock uncertainty
+                          0.00  290.83   clock reconvergence pessimism
+                                290.83 ^ _138659_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+                         14.27  305.10   library hold time
+                                305.10   data required time
+-----------------------------------------------------------------------------
+                                305.10   data required time
+                               -295.02   data arrival time
+-----------------------------------------------------------------------------
+                                -10.08   slack (VIOLATED)
+
+
+Startpoint: i_flit_vc[9] (input port clocked by vclk)
+Endpoint: _136024_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.00    0.00    0.00   clock vclk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                         50.00   50.00 ^ input external delay
+     2   24.34   62.32   45.35   95.35 ^ i_flit_vc[9] (in)
+                                         i_flit_vc[9] (net)
+                117.22    0.00   95.35 ^ _090570_/A (INVx1_ASAP7_75t_R)
+     2    1.03   28.03   22.96  118.31 v _090570_/Y (INVx1_ASAP7_75t_R)
+                                         _006947_ (net)
+                 28.03    0.07  118.37 v _090572_/A (AND3x2_ASAP7_75t_R)
+     1    1.80   10.47   24.63  143.00 v _090572_/Y (AND3x2_ASAP7_75t_R)
+                                         gen_input_port[4].gen_vc_inst[0].u_vc_buffer.wr_en (net)
+                 10.52    0.39  143.39 v hold6440/A (BUFx2_ASAP7_75t_R)
+     2    2.21   12.61   21.81  165.20 v hold6440/Y (BUFx2_ASAP7_75t_R)
+                                         net6440 (net)
+                 12.67    0.47  165.67 v _134893_/B (OA21x2_ASAP7_75t_R)
+     2   17.21   71.77   36.49  202.16 v _134893_/Y (OA21x2_ASAP7_75t_R)
+                                         _045373_ (net)
+                 71.80    0.98  203.14 v hold6441/A (BUFx2_ASAP7_75t_R)
+     1    1.00   10.61   36.28  239.42 v hold6441/Y (BUFx2_ASAP7_75t_R)
+                                         net6441 (net)
+                 10.62    0.11  239.53 v _134894_/B (XNOR2x2_ASAP7_75t_R)
+     5    4.35   23.33   36.10  275.63 ^ _134894_/Y (XNOR2x2_ASAP7_75t_R)
+                                         _045374_ (net)
+                 23.35    0.33  275.96 ^ _134895_/B (XNOR2x1_ASAP7_75t_R)
+     1    0.63   10.19   11.49  287.45 v _134895_/Y (XNOR2x1_ASAP7_75t_R)
+                                         _044480_ (net)
+                 10.19    0.04  287.49 v _136024_/D (DFFASRHQNx1_ASAP7_75t_R)
+                                287.49   data arrival time
+
+                          0.00    0.00   clock clk (rise edge)
+                        263.57  263.57   clock network delay (propagated)
+                         20.00  283.57   clock uncertainty
+                          0.00  283.57   clock reconvergence pessimism
+                                283.57 ^ _136024_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+                         13.84  297.41   library hold time
+                                297.41   data required time
+-----------------------------------------------------------------------------
+                                297.41   data required time
+                               -287.49   data arrival time
+-----------------------------------------------------------------------------
+                                 -9.92   slack (VIOLATED)
+
+
+Startpoint: i_flit_data[415] (input port clocked by vclk)
+Endpoint: _160265_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.00    0.00    0.00   clock vclk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                         50.00   50.00 v input external delay
+     1    1.45    2.97    1.26   51.26 v i_flit_data[415] (in)
+                                         i_flit_data[415] (net)
+                  3.02    0.00   51.26 v hold2029/A (BUFx2_ASAP7_75t_R)
+     1    0.60    6.81   16.01   67.27 v hold2029/Y (BUFx2_ASAP7_75t_R)
+                                         net2029 (net)
+                  6.81    0.06   67.33 v hold2024/A (BUFx2_ASAP7_75t_R)
+     1    0.51    6.56   17.09   84.42 v hold2024/Y (BUFx2_ASAP7_75t_R)
+                                         net2024 (net)
+                  6.56    0.04   84.47 v hold2030/A (BUFx2_ASAP7_75t_R)
+     1    0.79    7.41   17.59  102.06 v hold2030/Y (BUFx2_ASAP7_75t_R)
+                                         net2030 (net)
+                  7.41    0.09  102.15 v hold1984/A (BUFx2_ASAP7_75t_R)
+     1    1.31    9.20   18.95  121.10 v hold1984/Y (BUFx2_ASAP7_75t_R)
+                                         net1984 (net)
+                  9.22    0.22  121.32 v hold2025/A (BUFx2_ASAP7_75t_R)
+     1    1.38    9.45   19.70  141.02 v hold2025/Y (BUFx2_ASAP7_75t_R)
+                                         net2025 (net)
+                  9.47    0.23  141.25 v hold1955/A (BUFx2_ASAP7_75t_R)
+     1    1.30    9.16   19.62  160.86 v hold1955/Y (BUFx2_ASAP7_75t_R)
+                                         net1955 (net)
+                  9.18    0.22  161.08 v hold2026/A (BUFx2_ASAP7_75t_R)
+     1    1.47    9.80   19.87  180.94 v hold2026/Y (BUFx2_ASAP7_75t_R)
+                                         net2026 (net)
+                  9.82    0.26  181.21 v hold1985/A (BUFx2_ASAP7_75t_R)
+     1    1.12    8.52   19.37  200.57 v hold1985/Y (BUFx2_ASAP7_75t_R)
+                                         net1985 (net)
+                  8.53    0.17  200.74 v hold2027/A (BUFx2_ASAP7_75t_R)
+    32   21.68   86.49   49.61  250.34 v hold2027/Y (BUFx2_ASAP7_75t_R)
+                                         net2027 (net)
+                 87.07    4.18  254.52 v _159687_/A1 (AO21x1_ASAP7_75t_R)
+     1    0.62    8.42   37.91  292.43 v _159687_/Y (AO21x1_ASAP7_75t_R)
+                                         _067918_ (net)
+                  8.42    0.04  292.47 v _160265_/D (DFFASRHQNx1_ASAP7_75t_R)
+                                292.47   data arrival time
+
+                          0.00    0.00   clock clk (rise edge)
+                        268.17  268.17   clock network delay (propagated)
+                         20.00  288.17   clock uncertainty
+                          0.00  288.17   clock reconvergence pessimism
+                                288.17 ^ _160265_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+                         14.06  302.24   library hold time
+                                302.24   data required time
+-----------------------------------------------------------------------------
+                                302.24   data required time
+                               -292.47   data arrival time
+-----------------------------------------------------------------------------
+                                 -9.77   slack (VIOLATED)
+
+
+Startpoint: i_flit_vc[11] (input port clocked by vclk)
+Endpoint: _151175_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.00    0.00    0.00   clock vclk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                         50.00   50.00 v input external delay
+     1   12.22   25.28   13.76   63.76 v i_flit_vc[11] (in)
+                                         i_flit_vc[11] (net)
+                 32.87    0.00   63.76 v hold6442/A (BUFx2_ASAP7_75t_R)
+     3   13.98   59.14   43.79  107.55 v hold6442/Y (BUFx2_ASAP7_75t_R)
+                                         net6442 (net)
+                 69.37   12.83  120.38 v _090581_/A (AND3x1_ASAP7_75t_R)
+     2    1.16   12.55   29.89  150.27 v _090581_/Y (AND3x1_ASAP7_75t_R)
+                                         gen_input_port[5].gen_vc_inst[3].u_vc_buffer.wr_en (net)
+                 12.55    0.04  150.31 v _149491_/A (INVx1_ASAP7_75t_R)
+     2    1.56   17.28   12.97  163.28 ^ _149491_/Y (INVx1_ASAP7_75t_R)
+                                         _059594_ (net)
+                 17.29    0.13  163.41 ^ _149891_/B (AO21x2_ASAP7_75t_R)
+     3   25.00  127.33   47.83  211.24 ^ _149891_/Y (AO21x2_ASAP7_75t_R)
+                                         _059926_ (net)
+                127.35    1.02  212.26 ^ _150054_/E (OR5x1_ASAP7_75t_R)
+     1    0.58   10.76   45.72  257.97 ^ _150054_/Y (OR5x1_ASAP7_75t_R)
+                                         _060020_ (net)
+                 10.76    0.05  258.02 ^ _150055_/B (OA21x2_ASAP7_75t_R)
+     1    1.67   12.18   20.21  278.24 ^ _150055_/Y (OA21x2_ASAP7_75t_R)
+                                         _060021_ (net)
+                 12.19    0.18  278.41 ^ _150056_/B (XNOR2x1_ASAP7_75t_R)
+     1    0.61    9.84    9.57  287.98 v _150056_/Y (XNOR2x1_ASAP7_75t_R)
+                                         _059120_ (net)
+                  9.84    0.05  288.04 v _151175_/D (DFFASRHQNx1_ASAP7_75t_R)
+                                288.04   data arrival time
+
+                          0.00    0.00   clock clk (rise edge)
+                        263.78  263.78   clock network delay (propagated)
+                         20.00  283.78   clock uncertainty
+                          0.00  283.78   clock reconvergence pessimism
+                                283.78 ^ _151175_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+                         13.91  297.68   library hold time
+                                297.68   data required time
+-----------------------------------------------------------------------------
+                                297.68   data required time
+                               -288.04   data arrival time
+-----------------------------------------------------------------------------
+                                 -9.65   slack (VIOLATED)
+
+
+Startpoint: i_flit_data[483] (input port clocked by vclk)
+Endpoint: _166629_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.00    0.00    0.00   clock vclk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                         50.00   50.00 v input external delay
+     1    2.89    5.79    2.58   52.58 v i_flit_data[483] (in)
+                                         i_flit_data[483] (net)
+                  5.94    0.00   52.58 v hold5564/A (BUFx2_ASAP7_75t_R)
+     1    3.02   15.32   21.90   74.48 v hold5564/Y (BUFx2_ASAP7_75t_R)
+                                         net5564 (net)
+                 15.39    0.59   75.07 v hold5243/A (BUFx2_ASAP7_75t_R)
+     1    2.44   13.31   24.08   99.15 v hold5243/Y (BUFx2_ASAP7_75t_R)
+                                         net5243 (net)
+                 13.36    0.47   99.62 v hold5565/A (BUFx2_ASAP7_75t_R)
+     1    2.59   13.90   23.62  123.24 v hold5565/Y (BUFx2_ASAP7_75t_R)
+                                         net5565 (net)
+                 13.98    0.57  123.81 v hold5200/A (BUFx2_ASAP7_75t_R)
+     1    2.70   14.25   24.04  147.85 v hold5200/Y (BUFx2_ASAP7_75t_R)
+                                         net5200 (net)
+                 14.33    0.60  148.46 v hold5566/A (BUFx2_ASAP7_75t_R)
+     1    2.51   13.52   23.82  172.28 v hold5566/Y (BUFx2_ASAP7_75t_R)
+                                         net5566 (net)
+                 13.58    0.50  172.78 v hold5244/A (BUFx2_ASAP7_75t_R)
+     1    2.39   13.22   23.28  196.06 v hold5244/Y (BUFx2_ASAP7_75t_R)
+                                         net5244 (net)
+                 13.31    0.58  196.64 v hold5567/A (BUFx2_ASAP7_75t_R)
+    32   22.05   90.56   48.20  244.84 v hold5567/Y (BUFx2_ASAP7_75t_R)
+                                         net5567 (net)
+                 92.36    7.26  252.10 v _165892_/A1 (AO21x1_ASAP7_75t_R)
+     1    0.62    8.39   38.57  290.67 v _165892_/Y (AO21x1_ASAP7_75t_R)
+                                         _074063_ (net)
+                  8.39    0.06  290.73 v _166629_/D (DFFASRHQNx1_ASAP7_75t_R)
+                                290.73   data arrival time
+
+                          0.00    0.00   clock clk (rise edge)
+                        265.97  265.97   clock network delay (propagated)
+                         20.00  285.97   clock uncertainty
+                          0.00  285.97   clock reconvergence pessimism
+                                285.97 ^ _166629_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+                         14.18  300.16   library hold time
+                                300.16   data required time
+-----------------------------------------------------------------------------
+                                300.16   data required time
+                               -290.73   data arrival time
+-----------------------------------------------------------------------------
+                                 -9.43   slack (VIOLATED)
+
+
+Startpoint: i_flit_data[300] (input port clocked by vclk)
+Endpoint: _140736_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.00    0.00    0.00   clock vclk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                         50.00   50.00 v input external delay
+     1    2.31    4.65    2.04   52.04 v i_flit_data[300] (in)
+                                         i_flit_data[300] (net)
+                  4.74    0.00   52.04 v hold4241/A (BUFx2_ASAP7_75t_R)
+     1    0.72    7.19   16.85   68.89 v hold4241/Y (BUFx2_ASAP7_75t_R)
+                                         net4241 (net)
+                  7.19    0.06   68.94 v hold4236/A (BUFx2_ASAP7_75t_R)
+     1    0.78    7.38   17.79   86.74 v hold4236/Y (BUFx2_ASAP7_75t_R)
+                                         net4236 (net)
+                  7.38    0.08   86.82 v hold4220/A (BUFx2_ASAP7_75t_R)
+     1    1.77   10.98   19.86  106.68 v hold4220/Y (BUFx2_ASAP7_75t_R)
+                                         net4220 (net)
+                 11.02    0.39  107.07 v hold4237/A (BUFx2_ASAP7_75t_R)
+     1    1.62   10.39   20.83  127.90 v hold4237/Y (BUFx2_ASAP7_75t_R)
+                                         net4237 (net)
+                 10.42    0.30  128.20 v hold4194/A (BUFx2_ASAP7_75t_R)
+     1    1.88   11.37   21.11  149.31 v hold4194/Y (BUFx2_ASAP7_75t_R)
+                                         net4194 (net)
+                 11.42    0.41  149.72 v hold4238/A (BUFx2_ASAP7_75t_R)
+     1    1.63   10.40   20.98  170.70 v hold4238/Y (BUFx2_ASAP7_75t_R)
+                                         net4238 (net)
+                 10.43    0.29  170.99 v hold4221/A (BUFx2_ASAP7_75t_R)
+     1    1.88   11.40   21.12  192.11 v hold4221/Y (BUFx2_ASAP7_75t_R)
+                                         net4221 (net)
+                 11.46    0.43  192.54 v hold4239/A (BUFx2_ASAP7_75t_R)
+    32   23.84   98.82   45.98  238.52 v hold4239/Y (BUFx2_ASAP7_75t_R)
+                                         net4239 (net)
+                100.35    7.00  245.52 v _140092_/A1 (AO21x1_ASAP7_75t_R)
+     1    0.52    7.73   39.18  284.70 v _140092_/Y (AO21x1_ASAP7_75t_R)
+                                         _049046_ (net)
+                  7.73    0.02  284.72 v _140736_/D (DFFASRHQNx1_ASAP7_75t_R)
+                                284.72   data arrival time
+
+                          0.00    0.00   clock clk (rise edge)
+                        259.85  259.85   clock network delay (propagated)
+                         20.00  279.85   clock uncertainty
+                          0.00  279.85   clock reconvergence pessimism
+                                279.85 ^ _140736_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+                         14.15  294.01   library hold time
+                                294.01   data required time
+-----------------------------------------------------------------------------
+                                294.01   data required time
+                               -284.72   data arrival time
+-----------------------------------------------------------------------------
+                                 -9.28   slack (VIOLATED)
+
+
+Startpoint: i_flit_data[483] (input port clocked by vclk)
+Endpoint: _162235_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.00    0.00    0.00   clock vclk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                         50.00   50.00 v input external delay
+     1    2.89    5.79    2.58   52.58 v i_flit_data[483] (in)
+                                         i_flit_data[483] (net)
+                  5.94    0.00   52.58 v hold5564/A (BUFx2_ASAP7_75t_R)
+     1    3.02   15.32   21.90   74.48 v hold5564/Y (BUFx2_ASAP7_75t_R)
+                                         net5564 (net)
+                 15.39    0.59   75.07 v hold5243/A (BUFx2_ASAP7_75t_R)
+     1    2.44   13.31   24.08   99.15 v hold5243/Y (BUFx2_ASAP7_75t_R)
+                                         net5243 (net)
+                 13.36    0.47   99.62 v hold5565/A (BUFx2_ASAP7_75t_R)
+     1    2.59   13.90   23.62  123.24 v hold5565/Y (BUFx2_ASAP7_75t_R)
+                                         net5565 (net)
+                 13.98    0.57  123.81 v hold5200/A (BUFx2_ASAP7_75t_R)
+     1    2.70   14.25   24.04  147.85 v hold5200/Y (BUFx2_ASAP7_75t_R)
+                                         net5200 (net)
+                 14.33    0.60  148.46 v hold5566/A (BUFx2_ASAP7_75t_R)
+     1    2.51   13.52   23.82  172.28 v hold5566/Y (BUFx2_ASAP7_75t_R)
+                                         net5566 (net)
+                 13.58    0.50  172.78 v hold5244/A (BUFx2_ASAP7_75t_R)
+     1    2.39   13.22   23.28  196.06 v hold5244/Y (BUFx2_ASAP7_75t_R)
+                                         net5244 (net)
+                 13.31    0.58  196.64 v hold5567/A (BUFx2_ASAP7_75t_R)
+    32   22.05   90.56   48.20  244.84 v hold5567/Y (BUFx2_ASAP7_75t_R)
+                                         net5567 (net)
+                 93.21    8.61  253.44 v _161415_/A1 (AO21x1_ASAP7_75t_R)
+     1    0.53    7.79   38.31  291.75 v _161415_/Y (AO21x1_ASAP7_75t_R)
+                                         _069815_ (net)
+                  7.79    0.03  291.78 v _162235_/D (DFFASRHQNx1_ASAP7_75t_R)
+                                291.78   data arrival time
+
+                          0.00    0.00   clock clk (rise edge)
+                        266.69  266.69   clock network delay (propagated)
+                         20.00  286.69   clock uncertainty
+                          0.00  286.69   clock reconvergence pessimism
+                                286.69 ^ _162235_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+                         14.19  300.88   library hold time
+                                300.88   data required time
+-----------------------------------------------------------------------------
+                                300.88   data required time
+                               -291.78   data arrival time
+-----------------------------------------------------------------------------
+                                 -9.11   slack (VIOLATED)
+
+
+Startpoint: _177112_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: o_flit_valid[4] (output port clocked by vclk)
+Path Group: vclk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock clk (rise edge)
+                        244.42  244.42   clock network delay (propagated)
+                 12.53    0.00  244.42 ^ _177112_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+     1    1.33   25.01   58.23  302.65 ^ _177112_/QN (DFFASRHQNx1_ASAP7_75t_R)
+                                         _077336_ (net)
+                 25.02    0.06  302.72 ^ _176561_/A (INVx3_ASAP7_75t_R)
+     1    5.83   19.66   15.73  318.44 v _176561_/Y (INVx3_ASAP7_75t_R)
+                                         o_flit_valid[4] (net)
+                 19.85    1.09  319.53 v o_flit_valid[4] (out)
+                                319.53   data arrival time
+
+                  0.00    0.00    0.00   clock vclk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                          0.00    0.00   clock reconvergence pessimism
+                        -50.00  -50.00   output external delay
+                                -50.00   data required time
+-----------------------------------------------------------------------------
+                                -50.00   data required time
+                               -319.53   data arrival time
+-----------------------------------------------------------------------------
+                                369.53   slack (MET)
+
+
+Startpoint: _177155_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: o_flit_data[7] (output port clocked by vclk)
+Path Group: vclk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock clk (rise edge)
+                        244.18  244.18   clock network delay (propagated)
+                 13.16    0.00  244.18 ^ _177155_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+     1    1.44   26.20   59.24  303.43 ^ _177155_/QN (DFFASRHQNx1_ASAP7_75t_R)
+                                         _077379_ (net)
+                 26.21    0.09  303.52 ^ _176604_/A (INVx3_ASAP7_75t_R)
+     1    5.74   19.70   15.95  319.47 v _176604_/Y (INVx3_ASAP7_75t_R)
+                                         o_flit_data[7] (net)
+                 19.84    0.96  320.44 v o_flit_data[7] (out)
+                                320.44   data arrival time
+
+                  0.00    0.00    0.00   clock vclk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                          0.00    0.00   clock reconvergence pessimism
+                        -50.00  -50.00   output external delay
+                                -50.00   data required time
+-----------------------------------------------------------------------------
+                                -50.00   data required time
+                               -320.44   data arrival time
+-----------------------------------------------------------------------------
+                                370.44   slack (MET)
+
+
+Startpoint: _177110_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: o_flit_valid[2] (output port clocked by vclk)
+Path Group: vclk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock clk (rise edge)
+                        244.44  244.44   clock network delay (propagated)
+                 12.53    0.00  244.44 ^ _177110_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+     1    1.44   26.18   58.96  303.40 ^ _177110_/QN (DFFASRHQNx1_ASAP7_75t_R)
+                                         _077334_ (net)
+                 26.18    0.14  303.55 ^ _176559_/A (INVx3_ASAP7_75t_R)
+     1    5.75   19.72   15.94  319.49 v _176559_/Y (INVx3_ASAP7_75t_R)
+                                         o_flit_valid[2] (net)
+                 19.87    0.99  320.48 v o_flit_valid[2] (out)
+                                320.48   data arrival time
+
+                  0.00    0.00    0.00   clock vclk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                          0.00    0.00   clock reconvergence pessimism
+                        -50.00  -50.00   output external delay
+                                -50.00   data required time
+-----------------------------------------------------------------------------
+                                -50.00   data required time
+                               -320.48   data arrival time
+-----------------------------------------------------------------------------
+                                370.48   slack (MET)
+
+
+Startpoint: _177127_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: o_flit_type[11] (output port clocked by vclk)
+Path Group: vclk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock clk (rise edge)
+                        244.64  244.64   clock network delay (propagated)
+                 13.36    0.00  244.64 ^ _177127_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+     1    1.43   26.10   59.25  303.89 ^ _177127_/QN (DFFASRHQNx1_ASAP7_75t_R)
+                                         _077351_ (net)
+                 26.10    0.09  303.98 ^ _176576_/A (INVx3_ASAP7_75t_R)
+     1    5.73   19.66   15.92  319.90 v _176576_/Y (INVx3_ASAP7_75t_R)
+                                         o_flit_type[11] (net)
+                 19.81    0.96  320.85 v o_flit_type[11] (out)
+                                320.85   data arrival time
+
+                  0.00    0.00    0.00   clock vclk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                          0.00    0.00   clock reconvergence pessimism
+                        -50.00  -50.00   output external delay
+                                -50.00   data required time
+-----------------------------------------------------------------------------
+                                -50.00   data required time
+                               -320.85   data arrival time
+-----------------------------------------------------------------------------
+                                370.85   slack (MET)
+
+
+Startpoint: _177228_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: o_flit_data[80] (output port clocked by vclk)
+Path Group: vclk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock clk (rise edge)
+                        244.19  244.19   clock network delay (propagated)
+                 13.16    0.00  244.19 ^ _177228_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+     1    1.50   26.80   59.54  303.73 ^ _177228_/QN (DFFASRHQNx1_ASAP7_75t_R)
+                                         _077452_ (net)
+                 26.80    0.16  303.89 ^ _176677_/A (INVx3_ASAP7_75t_R)
+     1    5.73   19.84   16.09  319.98 v _176677_/Y (INVx3_ASAP7_75t_R)
+                                         o_flit_data[80] (net)
+                 19.98    0.95  320.94 v o_flit_data[80] (out)
+                                320.94   data arrival time
+
+                  0.00    0.00    0.00   clock vclk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                          0.00    0.00   clock reconvergence pessimism
+                        -50.00  -50.00   output external delay
+                                -50.00   data required time
+-----------------------------------------------------------------------------
+                                -50.00   data required time
+                               -320.94   data arrival time
+-----------------------------------------------------------------------------
+                                370.94   slack (MET)
+
+
+Startpoint: _177109_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: o_flit_valid[1] (output port clocked by vclk)
+Path Group: vclk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock clk (rise edge)
+                        244.61  244.61   clock network delay (propagated)
+                 13.35    0.00  244.61 ^ _177109_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+     1    1.43   26.02   59.19  303.80 ^ _177109_/QN (DFFASRHQNx1_ASAP7_75t_R)
+                                         _077333_ (net)
+                 26.03    0.09  303.89 ^ _176558_/A (INVx3_ASAP7_75t_R)
+     1    5.84   19.92   15.99  319.88 v _176558_/Y (INVx3_ASAP7_75t_R)
+                                         o_flit_valid[1] (net)
+                 20.11    1.08  320.96 v o_flit_valid[1] (out)
+                                320.96   data arrival time
+
+                  0.00    0.00    0.00   clock vclk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                          0.00    0.00   clock reconvergence pessimism
+                        -50.00  -50.00   output external delay
+                                -50.00   data required time
+-----------------------------------------------------------------------------
+                                -50.00   data required time
+                               -320.96   data arrival time
+-----------------------------------------------------------------------------
+                                370.96   slack (MET)
+
+
+Startpoint: _177235_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: o_flit_data[87] (output port clocked by vclk)
+Path Group: vclk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock clk (rise edge)
+                        244.14  244.14   clock network delay (propagated)
+                 13.15    0.00  244.14 ^ _177235_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+     1    1.51   26.89   59.60  303.74 ^ _177235_/QN (DFFASRHQNx1_ASAP7_75t_R)
+                                         _077459_ (net)
+                 26.89    0.16  303.89 ^ _176684_/A (INVx3_ASAP7_75t_R)
+     1    5.73   19.86   16.12  320.01 v _176684_/Y (INVx3_ASAP7_75t_R)
+                                         o_flit_data[87] (net)
+                 20.00    0.95  320.96 v o_flit_data[87] (out)
+                                320.96   data arrival time
+
+                  0.00    0.00    0.00   clock vclk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                          0.00    0.00   clock reconvergence pessimism
+                        -50.00  -50.00   output external delay
+                                -50.00   data required time
+-----------------------------------------------------------------------------
+                                -50.00   data required time
+                               -320.96   data arrival time
+-----------------------------------------------------------------------------
+                                370.96   slack (MET)
+
+
+Startpoint: _177130_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: o_flit_type[14] (output port clocked by vclk)
+Path Group: vclk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock clk (rise edge)
+                        244.66  244.66   clock network delay (propagated)
+                 13.37    0.00  244.66 ^ _177130_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+     1    1.40   25.82   59.01  303.68 ^ _177130_/QN (DFFASRHQNx1_ASAP7_75t_R)
+                                         _077354_ (net)
+                 25.82    0.13  303.80 ^ _176579_/A (INVx3_ASAP7_75t_R)
+     1    5.91   20.08   16.01  319.82 v _176579_/Y (INVx3_ASAP7_75t_R)
+                                         o_flit_type[14] (net)
+                 20.30    1.15  320.97 v o_flit_type[14] (out)
+                                320.97   data arrival time
+
+                  0.00    0.00    0.00   clock vclk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                          0.00    0.00   clock reconvergence pessimism
+                        -50.00  -50.00   output external delay
+                                -50.00   data required time
+-----------------------------------------------------------------------------
+                                -50.00   data required time
+                               -320.97   data arrival time
+-----------------------------------------------------------------------------
+                                370.97   slack (MET)
+
+
+Startpoint: _177116_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: o_flit_type[0] (output port clocked by vclk)
+Path Group: vclk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock clk (rise edge)
+                        244.67  244.67   clock network delay (propagated)
+                 13.37    0.00  244.67 ^ _177116_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+     1    1.43   26.05   59.21  303.89 ^ _177116_/QN (DFFASRHQNx1_ASAP7_75t_R)
+                                         _077340_ (net)
+                 26.05    0.09  303.97 ^ _176565_/A (INVx3_ASAP7_75t_R)
+     1    5.81   19.84   15.98  319.95 v _176565_/Y (INVx3_ASAP7_75t_R)
+                                         o_flit_type[0] (net)
+                 20.02    1.04  321.00 v o_flit_type[0] (out)
+                                321.00   data arrival time
+
+                  0.00    0.00    0.00   clock vclk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                          0.00    0.00   clock reconvergence pessimism
+                        -50.00  -50.00   output external delay
+                                -50.00   data required time
+-----------------------------------------------------------------------------
+                                -50.00   data required time
+                               -321.00   data arrival time
+-----------------------------------------------------------------------------
+                                371.00   slack (MET)
+
+
+Startpoint: _177131_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: o_flit_type[15] (output port clocked by vclk)
+Path Group: vclk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock clk (rise edge)
+                        243.87  243.87   clock network delay (propagated)
+                 13.53    0.00  243.87 ^ _177131_/CLK (DFFASRHQNx1_ASAP7_75t_R)
+     1    1.42   26.00   59.18  303.05 ^ _177131_/QN (DFFASRHQNx1_ASAP7_75t_R)
+                                         _077355_ (net)
+                 26.00    0.14  303.19 ^ _176580_/A (INVx3_ASAP7_75t_R)
+     1    6.28   21.21   16.47  319.66 v _176580_/Y (INVx3_ASAP7_75t_R)
+                                         o_flit_type[15] (net)
+                 21.48    1.34  321.00 v o_flit_type[15] (out)
+                                321.00   data arrival time
+
+                  0.00    0.00    0.00   clock vclk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                          0.00    0.00   clock reconvergence pessimism
+                        -50.00  -50.00   output external delay
+                                -50.00   data required time
+-----------------------------------------------------------------------------
+                                -50.00   data required time
+                               -321.00   data arrival time
+-----------------------------------------------------------------------------
+                                371.00   slack (MET)
+
+

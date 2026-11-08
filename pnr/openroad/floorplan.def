@@ -1,0 +1,83 @@
+VERSION 5.8 ;
+DIVIDERCHAR "/" ;
+BUSBITCHARS "[]" ;
+DESIGN router_top ;
+UNITS DISTANCE MICRONS 1000 ;
+
+DIEAREA ( 0 0 ) ( 200000 200000 ) ;
+
+TRACKS X 0 DO 1000 STEP 200 LAYER M1 ;
+TRACKS Y 0 DO 1000 STEP 200 LAYER M1 ;
+TRACKS X 0 DO 1000 STEP 200 LAYER M2 ;
+TRACKS Y 0 DO 1000 STEP 200 LAYER M2 ;
+TRACKS X 0 DO 1000 STEP 400 LAYER M3 ;
+TRACKS Y 0 DO 1000 STEP 400 LAYER M3 ;
+TRACKS X 0 DO 500 STEP 400 LAYER M4 ;
+TRACKS Y 0 DO 500 STEP 400 LAYER M4 ;
+TRACKS X 0 DO 250 STEP 800 LAYER M5 ;
+TRACKS Y 0 DO 250 STEP 800 LAYER M5 ;
+TRACKS X 0 DO 250 STEP 800 LAYER M6 ;
+TRACKS Y 0 DO 250 STEP 800 LAYER M6 ;
+TRACKS X 0 DO 125 STEP 1600 LAYER M7 ;
+TRACKS Y 0 DO 125 STEP 1600 LAYER M7 ;
+
+ROW ROW_0 Site_75t 10000 10000 FS DO 900 STEP 200 BY 1 ;
+
+PINS 18 ;
+- clk + NET clk + DIRECTION INPUT + USE SIGNAL
+  + LAYER M4 ( 0 0 ) ( 400 1000 )
+  + PLACED ( 100000 0 ) N ;
+- rst_n + NET rst_n + DIRECTION INPUT + USE SIGNAL
+  + LAYER M4 ( 0 0 ) ( 400 1000 )
+  + PLACED ( 105000 0 ) N ;
+- i_flit_valid[0] + NET i_flit_valid[0] + DIRECTION INPUT + USE SIGNAL
+  + LAYER M3 ( 0 0 ) ( 1000 400 )
+  + PLACED ( 0 20000 ) W ;
+- i_flit_valid[1] + NET i_flit_valid[1] + DIRECTION INPUT + USE SIGNAL
+  + LAYER M3 ( 0 0 ) ( 1000 400 )
+  + PLACED ( 0 40000 ) W ;
+- i_flit_valid[2] + NET i_flit_valid[2] + DIRECTION INPUT + USE SIGNAL
+  + LAYER M3 ( 0 0 ) ( 1000 400 )
+  + PLACED ( 0 60000 ) W ;
+- i_flit_valid[3] + NET i_flit_valid[3] + DIRECTION INPUT + USE SIGNAL
+  + LAYER M3 ( 0 0 ) ( 1000 400 )
+  + PLACED ( 0 80000 ) W ;
+- i_flit_valid[4] + NET i_flit_valid[4] + DIRECTION INPUT + USE SIGNAL
+  + LAYER M4 ( 0 0 ) ( 400 1000 )
+  + PLACED ( 20000 200000 ) S ;
+- i_flit_valid[5] + NET i_flit_valid[5] + DIRECTION INPUT + USE SIGNAL
+  + LAYER M4 ( 0 0 ) ( 400 1000 )
+  + PLACED ( 40000 200000 ) S ;
+- i_flit_valid[6] + NET i_flit_valid[6] + DIRECTION INPUT + USE SIGNAL
+  + LAYER M4 ( 0 0 ) ( 400 1000 )
+  + PLACED ( 60000 200000 ) S ;
+- i_flit_valid[7] + NET i_flit_valid[7] + DIRECTION INPUT + USE SIGNAL
+  + LAYER M4 ( 0 0 ) ( 400 1000 )
+  + PLACED ( 80000 200000 ) S ;
+- o_flit_valid[0] + NET o_flit_valid[0] + DIRECTION OUTPUT + USE SIGNAL
+  + LAYER M3 ( 0 0 ) ( 1000 400 )
+  + PLACED ( 200000 20000 ) E ;
+- o_flit_valid[1] + NET o_flit_valid[1] + DIRECTION OUTPUT + USE SIGNAL
+  + LAYER M3 ( 0 0 ) ( 1000 400 )
+  + PLACED ( 200000 40000 ) E ;
+- o_flit_valid[2] + NET o_flit_valid[2] + DIRECTION OUTPUT + USE SIGNAL
+  + LAYER M3 ( 0 0 ) ( 1000 400 )
+  + PLACED ( 200000 60000 ) E ;
+- o_flit_valid[3] + NET o_flit_valid[3] + DIRECTION OUTPUT + USE SIGNAL
+  + LAYER M3 ( 0 0 ) ( 1000 400 )
+  + PLACED ( 200000 80000 ) E ;
+- o_flit_valid[4] + NET o_flit_valid[4] + DIRECTION OUTPUT + USE SIGNAL
+  + LAYER M4 ( 0 0 ) ( 400 1000 )
+  + PLACED ( 120000 0 ) N ;
+- o_flit_valid[5] + NET o_flit_valid[5] + DIRECTION OUTPUT + USE SIGNAL
+  + LAYER M4 ( 0 0 ) ( 400 1000 )
+  + PLACED ( 140000 0 ) N ;
+- o_flit_valid[6] + NET o_flit_valid[6] + DIRECTION OUTPUT + USE SIGNAL
+  + LAYER M4 ( 0 0 ) ( 400 1000 )
+  + PLACED ( 160000 0 ) N ;
+- o_flit_valid[7] + NET o_flit_valid[7] + DIRECTION OUTPUT + USE SIGNAL
+  + LAYER M4 ( 0 0 ) ( 400 1000 )
+  + PLACED ( 180000 0 ) N ;
+END PINS
+
+END DESIGN
