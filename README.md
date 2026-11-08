@@ -1,5 +1,15 @@
-# Project Micro-NVSwitch
-## A Rubin-Class, High-Radix NoC Router for AI Fabrics (RTL-to-GDSII)
+# Micro-NVSwitch: 8x8 NoC Router ASIC with In-Network FP8 Reduction (Verilog RTL to GDSII, ASAP7 7nm)
+
+**Micro-NVSwitch is an open-source, NVSwitch-inspired 8x8 network-on-chip (NoC) router written in synthesizable Verilog RTL and taken through a full ASIC flow on the ASAP7 7nm FinFET PDK.** Unlike typical academic NoC routers, it does more than move packets: a SHARP-style FP8 (E4M3) ALU performs All-Reduce in the switch fabric itself, alongside 4 virtual channels per port, credit-based flow control, iSLIP allocation and hardware multicast.
+
+The repository covers the whole path from RTL to physical design:
+- **RTL design:** Verilog-2001, Verilator lint-clean
+- **Verification:** self-checking Icarus Verilog testbench plus a cocotb (Python) regression
+- **Synthesis:** Yosys mapped to ASAP7 standard cells (Cadence Genus and Synopsys DC scripts included)
+- **Place and route:** OpenROAD floorplan, placement, CTS and global routing (Cadence Innovus script included)
+- **Sign-off:** OpenSTA static timing and power analysis, with a UPF/CPF low-power intent
+
+![Micro-NVSwitch social preview](docs/social_preview.png)
 
 [![Verification](https://img.shields.io/badge/Verification-100%25%20Passing-brightgreen.svg)](docs/verification_plan.md)
 [![Lint](https://img.shields.io/badge/Verilator%20Lint-Clean-blue.svg)](rtl/)
