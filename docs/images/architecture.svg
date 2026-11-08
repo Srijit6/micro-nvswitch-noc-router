@@ -1,0 +1,196 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280mm" height="192mm" viewBox="0 0 280 192" version="1.1">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e0384f"/><stop offset="1" stop-color="#ffffff"/></linearGradient></defs>
+<rect x="0" y="0" width="280" height="192" fill="#ffffff"/>
+<rect x="0.75" y="0.75" width="278.5" height="190.5" rx="2.9" ry="2.9" style="fill:url(#bg);stroke:#a21f4f;stroke-width:1"/>
+<text x="4.5" y="12.5" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:9.88px;font-weight:bold;font-style:normal;text-anchor:start;fill:#ffffff">Micro-NVSwitch Router</text>
+<text x="4.8" y="19" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:3.53px;font-weight:normal;font-style:normal;text-anchor:start;fill:#ffffff">router_top · 8 ports × 4 VCs · 64-bit flits</text>
+<rect x="24" y="34" width="64" height="142" rx="0" ry="0" style="fill:#ffe0e5;stroke:#000000;stroke-width:0.5" />
+<rect x="94" y="34" width="112" height="110" rx="0" ry="0" style="fill:#ffe0e5;stroke:#000000;stroke-width:0.5" />
+<path d="M 212,34 H 256 V 176 H 94 V 150 H 212 Z" style="fill:#ffe0e5;stroke:#000000;stroke-width:0.5;stroke-linejoin:round"/>
+<text x="56" y="41.5" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:6.35px;font-weight:bold;font-style:normal;text-anchor:middle;fill:#000000">Buffer Write</text>
+<text x="56" y="46" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">cycle 1 · one per input port (×8)</text>
+<text x="150" y="41.5" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:6.35px;font-weight:bold;font-style:normal;text-anchor:middle;fill:#000000">VC &amp; Switch Allocation</text>
+<text x="150" y="46" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">cycle 2</text>
+<text x="234" y="41" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:6.35px;font-weight:bold;font-style:normal;text-anchor:middle;fill:#000000">Switch</text>
+<text x="234" y="47.5" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:6.35px;font-weight:bold;font-style:normal;text-anchor:middle;fill:#000000">Traversal</text>
+<text x="234" y="51.5" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">cycle 3</text>
+<rect x="94" y="17" width="162" height="12" rx="1.9" ry="1.9" style="fill:#ffe0e5;stroke:#6c0e1d;stroke-width:0.265" />
+<rect x="94" y="17" width="162" height="12" rx="1.9" ry="1.9" style="fill:none;stroke:#000000;stroke-width:0.5" />
+<text x="175" y="24.6" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:5.29px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">Downstream Credit Counters  (8 ports × 4 VCs × 4 bit)</text>
+<rect x="5" y="34" width="13" height="142" rx="1.0" ry="1.0" style="fill:#ffffff;stroke:#000000;stroke-width:0.5" />
+<text x="9.7" y="105" transform="rotate(90 9.7 105)" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:6.35px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">Upstream Link Interface</text>
+<rect x="262" y="34" width="13" height="142" rx="1.0" ry="1.0" style="fill:#ffffff;stroke:#000000;stroke-width:0.5" />
+<text x="266.7" y="105" transform="rotate(90 266.7 105)" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:6.35px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">Downstream Link Interface</text>
+<path d="M 30,58 L 36,52 V 98 L 30,92 Z" style="fill:#ffffff;stroke:#000000;stroke-width:0.5"/>
+<text x="32.9" y="75" transform="rotate(90 32.9 75)" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">VC demux</text>
+<path d="M 18,75 L 30,75" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 27.3542,73.6771 v 2.6458 h 1.3229 l 1.3229,-1.3229 l -1.3229,-1.3229 z" style="fill:#ffffff;stroke:#000000;stroke-width:0.2646"/>
+<text x="19.5" y="73.0" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:start;fill:#000000">i_flit_*</text>
+<rect x="42" y="53" width="40" height="10" rx="1.0" ry="1.0" style="fill:#ffffff;stroke:#000000;stroke-width:0.5" />
+<text x="46.5" y="59.1" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.82px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">VC0</text>
+<rect x="51.5" y="55" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="55.1" y="55" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="58.7" y="55" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="62.3" y="55" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="65.9" y="55" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="69.5" y="55" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="73.1" y="55" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="76.7" y="55" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<path d="M 36,58 L 42,58" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 39.3542,56.6771 v 2.6458 h 1.3229 l 1.3229,-1.3229 l -1.3229,-1.3229 z" style="fill:#ffffff;stroke:#000000;stroke-width:0.2646"/>
+<rect x="42" y="65" width="40" height="10" rx="1.0" ry="1.0" style="fill:#ffffff;stroke:#000000;stroke-width:0.5" />
+<text x="46.5" y="71.1" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.82px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">VC1</text>
+<rect x="51.5" y="67" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="55.1" y="67" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="58.7" y="67" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="62.3" y="67" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="65.9" y="67" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="69.5" y="67" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="73.1" y="67" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="76.7" y="67" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<path d="M 36,70 L 42,70" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 39.3542,68.6771 v 2.6458 h 1.3229 l 1.3229,-1.3229 l -1.3229,-1.3229 z" style="fill:#ffffff;stroke:#000000;stroke-width:0.2646"/>
+<rect x="42" y="77" width="40" height="10" rx="1.0" ry="1.0" style="fill:#ffffff;stroke:#000000;stroke-width:0.5" />
+<text x="46.5" y="83.1" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.82px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">VC2</text>
+<rect x="51.5" y="79" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="55.1" y="79" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="58.7" y="79" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="62.3" y="79" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="65.9" y="79" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="69.5" y="79" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="73.1" y="79" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="76.7" y="79" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<path d="M 36,82 L 42,82" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 39.3542,80.6771 v 2.6458 h 1.3229 l 1.3229,-1.3229 l -1.3229,-1.3229 z" style="fill:#ffffff;stroke:#000000;stroke-width:0.2646"/>
+<rect x="42" y="89" width="40" height="10" rx="1.0" ry="1.0" style="fill:#ffffff;stroke:#000000;stroke-width:0.5" />
+<text x="46.5" y="95.1" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.82px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">VC3</text>
+<rect x="51.5" y="91" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="55.1" y="91" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="58.7" y="91" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="62.3" y="91" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="65.9" y="91" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="69.5" y="91" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="73.1" y="91" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<rect x="76.7" y="91" width="2.8" height="6" style="fill:#ffffff;stroke:#000000;stroke-width:0.2"/>
+<path d="M 36,94 L 42,94" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 39.3542,92.6771 v 2.6458 h 1.3229 l 1.3229,-1.3229 l -1.3229,-1.3229 z" style="fill:#ffffff;stroke:#000000;stroke-width:0.2646"/>
+<text x="62" y="51.2" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">vc_buffer.v · 4 × 8-flit FIFOs × 66 bit</text>
+<path d="M 39,99 L 39,110 L 18,110" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 20.6458,108.6771 v 2.6458 h -1.3229 l -1.3229,-1.3229 l 1.3229,-1.3229 z" style="fill:#ffffff;stroke:#000000;stroke-width:0.2646"/>
+<text x="21.5" y="108.4" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:start;fill:#000000">o_credit_ret</text>
+<path d="M 74,105 L 74,132" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 72.6771,129.3542 h 2.6458 v 1.3229 l -1.3229,1.3229 l -1.3229,-1.3229 z" style="fill:#ffffff;stroke:#000000;stroke-width:0.2646"/>
+<text x="72.8" y="119" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:end;fill:#000000">occupancy, idle</text>
+<path d="M 74,99 L 74,105" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<rect x="30" y="132" width="52" height="22" rx="1.0" ry="1.0" style="fill:#ffffff;stroke:#000000;stroke-width:0.5" />
+<text x="56" y="141" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:4.94px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">Telemetry</text>
+<text x="56" y="146.5" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.82px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">o_occupancy · o_vc_idle</text>
+<text x="56" y="150.5" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">UPF/CPF gating intent</text>
+<path d="M 30,143 L 18,143" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 20.6458,141.6771 v 2.6458 h -1.3229 l -1.3229,-1.3229 l 1.3229,-1.3229 z" style="fill:#ffffff;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 82,58 L 91,58" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 82,70 L 91,70" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 82,82 L 91,82" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 82,94 L 91,94" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 91,58 L 91,147" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<circle cx="91" cy="58" r="0.6" fill="#000"/>
+<rect x="100" y="52" width="40" height="16" rx="1.0" ry="1.0" style="fill:#ffffff;stroke:#000000;stroke-width:0.5" />
+<text x="120" y="59" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:4.94px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">VC Allocator</text>
+<text x="120" y="63.5" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">all-or-nothing multicast</text>
+<text x="120" y="66.3" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">output-VC reservation</text>
+<rect x="100" y="76" width="40" height="16" rx="1.0" ry="1.0" style="fill:#ffffff;stroke:#000000;stroke-width:0.5" />
+<text x="120" y="83" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:4.59px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">Input VC Select</text>
+<text x="120" y="87.5" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">round-robin over VCs</text>
+<text x="120" y="90.3" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">with route + credit</text>
+<rect x="100" y="104" width="40" height="20" rx="1.0" ry="1.0" style="fill:#ffffff;stroke:#000000;stroke-width:0.5" />
+<text x="120" y="111.5" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:4.59px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">Route State</text>
+<text x="120" y="116" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">per input VC (×32):</text>
+<text x="120" y="119" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">dest_mask · sharp_op</text>
+<text x="120" y="122" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">served mask</text>
+<rect x="154" y="52" width="46" height="46" rx="1.0" ry="1.0" style="fill:#ffffff;stroke:#000000;stroke-width:0.5" />
+<text x="177" y="68" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:4.94px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">Switch</text>
+<text x="177" y="74" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:4.94px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">Allocator</text>
+<text x="177" y="79" style="font-family:'Liberation Mono','DejaVu Sans Mono',monospace;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">islip_arbiter.v</text>
+<text x="177" y="84" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">8×8 request matrix</text>
+<text x="177" y="87" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">per-output round-robin</text>
+<text x="177" y="90" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">multicast: many grants/input</text>
+<path d="M 91,60 L 100,60" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 97.3542,58.6771 v 2.6458 h 1.3229 l 1.3229,-1.3229 l -1.3229,-1.3229 z" style="fill:#ffffff;stroke:#000000;stroke-width:0.2646"/>
+<text x="93.6" y="58.6" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:start;fill:#000000">head</text>
+<path d="M 91,84 L 100,84" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 97.3542,82.6771 v 2.6458 h 1.3229 l 1.3229,-1.3229 l -1.3229,-1.3229 z" style="fill:#ffffff;stroke:#000000;stroke-width:0.2646"/>
+<text x="93.2" y="82.6" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:start;fill:#000000">front</text>
+<path d="M 120,68 L 120,76" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 118.6771,73.3542 h 2.6458 v 1.3229 l -1.3229,1.3229 l -1.3229,-1.3229 z" style="fill:#ffffff;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 120,104 L 120,92" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 118.6771,94.6458 h 2.6458 v -1.3229 l -1.3229,-1.3229 l -1.3229,1.3229 z" style="fill:#ffffff;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 140,84 L 154,84" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 151.3542,82.6771 v 2.6458 h 1.3229 l 1.3229,-1.3229 l -1.3229,-1.3229 z" style="fill:#ffffff;stroke:#000000;stroke-width:0.2646"/>
+<text x="144" y="82.6" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:start;fill:#000000">req</text>
+<path d="M 177,98 L 177,114 L 140,114" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 142.6458,112.6771 v 2.6458 h -1.3229 l -1.3229,-1.3229 l 1.3229,-1.3229 z" style="fill:#ffffff;stroke:#000000;stroke-width:0.2646"/>
+<text x="144" y="112.6" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:start;fill:#000000">served / dequeue</text>
+<path d="M 186,29 L 186,52" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 184.6771,49.3542 h 2.6458 v 1.3229 l -1.3229,1.3229 l -1.3229,-1.3229 z" style="fill:#ffffff;stroke:#000000;stroke-width:0.2646"/>
+<text x="184.8" y="50" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:end;fill:#000000">credit</text>
+<path d="M 195,52 L 195,29" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 193.6771,31.6458 h 2.6458 v -1.3229 l -1.3229,-1.3229 l -1.3229,1.3229 z" style="fill:#ffffff;stroke:#000000;stroke-width:0.2646"/>
+<text x="196.3" y="50" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:start;fill:#000000">debit</text>
+<path d="M 268.5,34 L 268.5,23 L 256,23" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 258.6458,21.6771 v 2.6458 h -1.3229 l -1.3229,-1.3229 l 1.3229,-1.3229 z" style="fill:#ffffff;stroke:#000000;stroke-width:0.2646"/>
+<text x="267.6" y="31.5" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:end;fill:#000000">i_credit_ret</text>
+<rect x="217" y="56" width="34" height="44" rx="1.0" ry="1.0" style="fill:#ffffff;stroke:#000000;stroke-width:0.5" />
+<text x="234" y="62" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:3.88px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">8×8 Multicast</text>
+<text x="234" y="66.5" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:3.88px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#000000">Crossbar</text>
+<path d="M 223.3,70 V 98.8" style="stroke:#9aa3b2;stroke-width:0.18"/>
+<path d="M 221.5,71.8 H 250.3" style="stroke:#9aa3b2;stroke-width:0.18"/>
+<path d="M 226.9,70 V 98.8" style="stroke:#9aa3b2;stroke-width:0.18"/>
+<path d="M 221.5,75.39999999999999 H 250.3" style="stroke:#9aa3b2;stroke-width:0.18"/>
+<path d="M 230.5,70 V 98.8" style="stroke:#9aa3b2;stroke-width:0.18"/>
+<path d="M 221.5,79.0 H 250.3" style="stroke:#9aa3b2;stroke-width:0.18"/>
+<path d="M 234.10000000000002,70 V 98.8" style="stroke:#9aa3b2;stroke-width:0.18"/>
+<path d="M 221.5,82.6 H 250.3" style="stroke:#9aa3b2;stroke-width:0.18"/>
+<path d="M 237.70000000000002,70 V 98.8" style="stroke:#9aa3b2;stroke-width:0.18"/>
+<path d="M 221.5,86.2 H 250.3" style="stroke:#9aa3b2;stroke-width:0.18"/>
+<path d="M 241.3,70 V 98.8" style="stroke:#9aa3b2;stroke-width:0.18"/>
+<path d="M 221.5,89.8 H 250.3" style="stroke:#9aa3b2;stroke-width:0.18"/>
+<path d="M 244.9,70 V 98.8" style="stroke:#9aa3b2;stroke-width:0.18"/>
+<path d="M 221.5,93.39999999999999 H 250.3" style="stroke:#9aa3b2;stroke-width:0.18"/>
+<path d="M 248.5,70 V 98.8" style="stroke:#9aa3b2;stroke-width:0.18"/>
+<path d="M 221.5,97.0 H 250.3" style="stroke:#9aa3b2;stroke-width:0.18"/>
+<circle cx="226.9" cy="71.8" r="0.75" fill="#e0384f"/>
+<circle cx="234.10000000000002" cy="71.8" r="0.75" fill="#e0384f"/>
+<circle cx="241.3" cy="71.8" r="0.75" fill="#e0384f"/>
+<circle cx="248.5" cy="71.8" r="0.75" fill="#e0384f"/>
+<circle cx="237.70000000000002" cy="79.0" r="0.75" fill="#e0384f"/>
+<circle cx="223.3" cy="89.8" r="0.75" fill="#e0384f"/>
+<rect x="217" y="108" width="34" height="14" rx="1.0" ry="1.0" style="fill:#e0384f;stroke:#000000;stroke-width:0.5;stroke-dasharray:0.5,0.5" />
+<text x="234" y="114.5" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:3.53px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#ffffff">Output Register</text>
+<text x="234" y="118.8" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#ffffff">PIPELINED = 1</text>
+<path d="M 234,100 L 234,108" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 232.6771,105.3542 h 2.6458 v 1.3229 l -1.3229,1.3229 l -1.3229,-1.3229 z" style="fill:#ffffff;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 251,115 L 262,115" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 259.3542,113.6771 v 2.6458 h 1.3229 l 1.3229,-1.3229 l -1.3229,-1.3229 z" style="fill:#ffffff;stroke:#000000;stroke-width:0.2646"/>
+<text x="252.3" y="113.4" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:start;fill:#000000">o_flit_*</text>
+<path d="M 200,64 L 217,64" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 214.3542,62.6771 v 2.6458 h 1.3229 l 1.3229,-1.3229 l -1.3229,-1.3229 z" style="fill:#ffffff;stroke:#000000;stroke-width:0.2646"/>
+<text x="200.8" y="62.6" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:start;fill:#000000">grants</text>
+<path d="M 91,147 L 209,147 L 209,82" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 214.3542,80.6771 v 2.6458 h 1.3229 l 1.3229,-1.3229 l -1.3229,-1.3229 z" style="fill:#ffffff;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 209,82 L 214.3542,82" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<text x="96" y="153" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:start;fill:#000000">flit datapath: 66 bit × 8 inputs (selected VC per port)</text>
+<rect x="104" y="155" width="100" height="17" rx="1.0" ry="1.0" style="fill:#e0384f;stroke:#000000;stroke-width:0.5;stroke-dasharray:0.5,0.5" />
+<text x="154" y="161.8" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:4.23px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#ffffff">SHARP Reduction ALU  (sharp_alu.v)</text>
+<text x="154" y="166.3" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.82px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#ffffff">FP8 E4M3 SUM / MAX / MIN · INT32 SUM · XOR</text>
+<text x="154" y="170" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:middle;fill:#ffffff">operands: crossbar inputs 0 and 1 when sharp_op ≠ NONE</text>
+<circle cx="180" cy="147" r="0.6" fill="#000"/>
+<path d="M 180,147 L 180,155" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 178.6771,152.3542 h 2.6458 v 1.3229 l -1.3229,1.3229 l -1.3229,-1.3229 z" style="fill:#ffffff;stroke:#000000;stroke-width:0.2646"/>
+<text x="181.3" y="152.3" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:start;fill:#000000">in 0, in 1</text>
+<path d="M 204,163.5 L 262,163.5" style="fill:none;stroke:#000000;stroke-width:0.2646"/>
+<path d="M 259.3542,162.1771 v 2.6458 h 1.3229 l 1.3229,-1.3229 l -1.3229,-1.3229 z" style="fill:#ffffff;stroke:#000000;stroke-width:0.2646"/>
+<text x="214" y="161.9" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.47px;font-weight:normal;font-style:normal;text-anchor:start;fill:#000000">o_sharp_result / o_sharp_active</text>
+<rect x="24" y="180.5" width="6.5" height="6.5" rx="0" ry="0" style="fill:#e0384f;stroke:#000000;stroke-width:0.5;stroke-dasharray:0.5,0.5" />
+<text x="33.5" y="185.6" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:4.23px;font-weight:normal;font-style:italic;text-anchor:start;fill:#ffffff">Optional / mode-dependent feature</text>
+<text x="275" y="186" style="font-family:'Liberation Sans',Arial,sans-serif;font-size:2.82px;font-weight:normal;font-style:normal;text-anchor:end;fill:#000000">single-flit latency: 3 cycles, i_flit_valid → o_flit_valid</text>
+</svg>
