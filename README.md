@@ -1,6 +1,8 @@
-# Micro-NVSwitch: 8x8 NoC Router with In-Network FP8 Reduction (Verilog RTL, ASAP7 7nm Layout)
+# Micro-NVSwitch: 8x8 NoC Router with In-Network FP8 Reduction (ASAP7 7nm Layout)
 
-Micro-NVSwitch is an 8-port network-on-chip router written in Verilog and implemented on the ASAP7 7nm predictive PDK with Yosys, OpenROAD and OpenSTA. The design is loosely modelled on the role an NVSwitch plays in a GPU fabric. It routes unicast and multicast packets between eight ports, and it has a small reduction ALU that can combine the payloads of two packets as they cross the switch, in the spirit of Mellanox/NVIDIA SHARP [2].
+Micro-NVSwitch is an 8-port network-on-chip router written in Verilog and implemented on the ASAP7 7nm predictive PDK with Yosys, OpenROAD and OpenSTA.
+
+The design is loosely modelled on the role an NVSwitch plays in a GPU fabric. It routes unicast and multicast packets between eight ports, and it has a small reduction ALU that can combine the payloads of two packets as they cross the switch, in the spirit of Mellanox/NVIDIA SHARP [2].
 
 The point of putting a reduction unit in a switch is that an All-Reduce then needs fewer trips through the network: partial sums are combined in the fabric instead of at every endpoint. This repository implements a one-switch, two-operand version of that idea. It is a study of the router microarchitecture and of what the open-source ASAP7 flow can do with it, not a model of a production NVSwitch.
 
