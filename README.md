@@ -17,9 +17,9 @@ The point of putting a reduction unit in a switch is that an All-Reduce then nee
 
 ## Architecture
 
-![Block diagram of router_top. Each of 8 input ports has a VC demux and four 8-entry FIFOs. Head flits go to a VC allocator; an input VC selector, gated by downstream credit counters, builds an 8x8 request matrix for a round-robin switch allocator. Grants steer an 8x8 multicast crossbar with an output register. A SHARP ALU taps crossbar inputs 0 and 1 and drives telemetry outputs; VC occupancy and idle flags are exported as telemetry.](docs/images/architecture.png)
+![Block diagram of router_top in three pipeline-stage regions. Buffer Write: an upstream link interface feeds a VC demux and four 8-flit FIFOs per input port; FIFO dequeue returns o_credit_ret upstream, and occupancy and idle flags go to a telemetry block. VC and Switch Allocation: head flits enter a VC allocator that reserves all output VCs of the destination mask at once; an input VC selector reads per-VC route state (dest_mask, sharp_op, served mask) and sends requests to a round-robin switch allocator, which reads and debits a bank of downstream credit counters that i_credit_ret refills. Switch Traversal: grants steer an 8x8 multicast crossbar followed by an optional output register (PIPELINED=1) to the downstream link interface. An optional SHARP reduction ALU taps crossbar inputs 0 and 1 and drives o_sharp_result and o_sharp_active.](docs/images/architecture.png)
 
-*Figure 1. `router_top` block diagram. A single-flit packet takes three cycles from `i_flit_valid` to `o_flit_valid`.*
+*Figure 1. `router_top` block diagram, one region per pipeline cycle: buffer write, VC and switch allocation, switch traversal. A single-flit packet takes three cycles from `i_flit_valid` to `o_flit_valid`. Red dashed blocks are optional or mode-dependent. Editable source: [`docs/images/architecture.svg`](docs/images/architecture.svg).*
 
 All parameters come from `rtl/include/router_pkg.v`: 8 ports, 4 virtual channels (VCs) per port, 8-flit buffers and 64-bit flits. A flit carries a 2-bit type (HEAD, BODY, TAIL or SINGLE) alongside its data. The head flit holds an 8-bit destination mask in bits [63:56], so any subset of outputs can be addressed and multicast needs no separate packet format. It also holds the source port, an 8-bit packet ID and a 3-bit SHARP opcode.
 
