@@ -1,192 +1,108 @@
-# Micro-NVSwitch: 8x8 NoC Router ASIC with In-Network FP8 Reduction (Verilog RTL to GDSII, ASAP7 7nm)
+# Micro-NVSwitch: 8x8 NoC Router ASIC with In-Network FP8 Reduction (Verilog RTL-to-GDSII Flow, ASAP7 7nm)
 
-**Micro-NVSwitch is an open-source, NVSwitch-inspired 8x8 network-on-chip (NoC) router written in synthesizable Verilog RTL and taken through a full ASIC flow on the ASAP7 7nm FinFET PDK.** Unlike typical academic NoC routers, it does more than move packets: a SHARP-style FP8 (E4M3) ALU performs All-Reduce in the switch fabric itself, alongside 4 virtual channels per port, credit-based flow control, iSLIP allocation and hardware multicast.
+[![Release](https://img.shields.io/github/v/release/Srijit6/micro-nvswitch-noc-router)](https://github.com/Srijit6/micro-nvswitch-noc-router/releases)
+[![Tests](https://img.shields.io/badge/cocotb-14%2F14%20passing-brightgreen.svg)](#4-verification)
+[![Lint](https://img.shields.io/badge/Verilator%20lint-clean-blue.svg)](rtl/)
+[![PDK](https://img.shields.io/badge/PDK-ASAP7%207nm-purple.svg)](#6-physical-design)
 
-The repository covers the whole path from RTL to physical design:
-- **RTL design:** Verilog-2001, Verilator lint-clean
-- **Verification:** self-checking Icarus Verilog testbench plus a cocotb (Python) regression
-- **Synthesis:** Yosys mapped to ASAP7 standard cells (Cadence Genus and Synopsys DC scripts included)
-- **Place and route:** OpenROAD floorplan, placement, CTS and global routing (Cadence Innovus script included)
-- **Sign-off:** OpenSTA static timing and power analysis, with a UPF/CPF low-power intent
+**Micro-NVSwitch is an open-source 8x8 network-on-chip (NoC) router, inspired by NVIDIA NVSwitch, written in synthesizable Verilog RTL and implemented on the ASAP7 7nm FinFET PDK with Yosys, OpenROAD and OpenSTA.** Unlike most academic NoC routers, it does more than move packets: a SHARP-style ALU reduces FP8 (E4M3) vectors inside the switch, the in-network All-Reduce used in GPU fabrics. It also has 4 virtual channels per port, credit-based flow control, iSLIP switch allocation and hardware multicast.
 
-![Micro-NVSwitch social preview](docs/social_preview.png)
-
-[![Verification](https://img.shields.io/badge/Verification-100%25%20Passing-brightgreen.svg)](docs/verification_plan.md)
-[![Lint](https://img.shields.io/badge/Verilator%20Lint-Clean-blue.svg)](rtl/)
-[![Synthesis](https://img.shields.io/badge/Synthesis-Yosys%20%7C%20Genus-orange.svg)](synth/)
-[![Node](https://img.shields.io/badge/PDK-ASAP7%207nm%20FinFET-purple.svg)](pnr/)
-
----
-
-## 1. Background & Motivation
-In trillion-parameter Large Language Models (LLMs), inter-GPU data movement is the primary bottleneck. As compute scales across thousands of Tensor Cores via Tensor and Pipeline Parallelism, GPUs spend critical latency waiting for All-Reduce and All-to-All data synchronization.
-
-NVIDIA's NVSwitch fabric transforms entire server racks into unified compute nodes:
-- **Blackwell NVLink 5:** Delivers 1.8 TB/s per GPU in the NVL72 platform.
-- **Vera Rubin NVLink 6:** Doubles bandwidth to **3.6 TB/s per GPU** with 400 Gbps SerDes, reaching an aggregate rack bandwidth of **260 TB/s**.
-
-**Project Micro-NVSwitch** implements a complete RTL-to-GDSII high-radix, non-blocking NoC router demonstrating mastery over the exact data-movement and physical design challenges faced by silicon teams building Blackwell- and Rubin-class architectures.
+| | |
+|---|---|
+| **RTL** | Verilog-2001, 5 modules + package, Verilator lint-clean |
+| **Verification** | 14/14 cocotb tests (incl. random traffic with scoreboard), 6/6 Icarus testbench checks |
+| **Synthesis** | Yosys → ASAP7 RVT: 92,890 cells, 14,192 µm² |
+| **Physical design** | OpenROAD floorplan → placement → CTS → global route, 185.6 µm × 185.6 µm die |
+| **Sign-off** | OpenSTA at 2.5 ns: setup met (+74 ps), 142 mW. Hold, detailed routing and GDSII still open ([details](#limitations)) |
 
 ---
 
-## 2. Key Architecture Features
+## 1. Architecture
 
-```
-               +---------------------------------------------------+
-               |                 MICRO-NVSWITCH                    |
-               |                                                   |
- Input Port 0 >| [VC0..VC3] ---\                                   |> Output Port 0
- Input Port 1 >| [VC0..VC3] ----\     +--------------------+       |> Output Port 1
- Input Port 2 >| [VC0..VC3] ----->---|    iSLIP Switch    |       |> Output Port 2
- Input Port 3 >| [VC0..VC3] ----/     |     Allocator      |       |> Output Port 3
- Input Port 4 >| [VC0..VC3] ---/      +--------------------+       |> Output Port 4
- Input Port 5 >| [VC0..VC3] ---\                |                  |> Output Port 5
- Input Port 6 >| [VC0..VC3] ----\     +--------------------+       |> Output Port 6
- Input Port 7 >| [VC0..VC3] ----->---| 8x8 Crossbar Matrix |------>|> Output Port 7
-               |                      +--------------------+       |
-               |                                |                  |
-               |                      +--------------------+       |
-               |                      |   SHARP FP8 ALU    |       |
-               |                      | (In-Network Red.)  |       |
-               |                      +--------------------+       |
-               +---------------------------------------------------+
-```
+![Block diagram of router_top: 8 input ports each with 4 VC FIFOs feed a VC allocator and input VC selector, which drive an iSLIP switch allocator; grants steer a pipelined 8x8 multicast crossbar to 8 output ports. Downstream credit counters gate requests, a SHARP ALU taps crossbar inputs 0 and 1, and VC occupancy feeds power telemetry.](docs/images/architecture.png)
 
-- **8x8 Non-Blocking Crossbar:** Full bisection bandwidth routing with single-cycle pipelined multiplexer stages for high $F_{max}$.
-- **Lossless Credit-Based Flow Control:** Upstream sender tracks downstream credits; zero packet drops under severe backpressure.
-- **4 Virtual Channels (VCs) per Port:** Eliminates Head-of-Line (HoL) blocking between latency-critical control flits and large payloads.
-- **iSLIP Multi-Stage Switch Allocator:** Starvation-free round-robin matching providing 100% throughput for uniform traffic.
-- **AI Multicast Routing:** Native 1-to-$N$ broadcast and fanout replication for All-Reduce collectives.
-- **In-Network Compute (SHARP Engine):** Emulates NVIDIA's Scalable Hierarchical Aggregation and Reduction Protocol (SHARP) with an on-chip ALU performing FP8 (E4M3) vector reductions on the fly.
-- **Low-Power Telemetry & UPF 3.0:** Dynamic activity tracking and fine-grained clock/power gating for idle virtual channels.
+*Figure 1. `router_top` block diagram. A flit takes three cycles: buffer write, VC + switch allocation, then crossbar traversal into the output register.*
 
----
+- **8 ports × 4 virtual channels:** each VC is an 8-flit FIFO of 66-bit flits (2-bit type + 64-bit data), so a blocked packet on one VC does not stall the others (no head-of-line blocking).
+- **Credit-based flow control:** 4-bit per-VC credit counters on every output. A flit is only sent when the downstream buffer has space, so nothing is dropped.
+- **Atomic multicast VC allocation:** a head flit reserves *all* of its destination output VCs in one cycle or none of them. This keeps multicast wormhole routing deadlock-free.
+- **iSLIP switch allocator:** round-robin request/grant/accept on an 8×8 request matrix. Multicast flits can be served over several cycles.
+- **SHARP reduction ALU:** element-wise FP8 SUM/MAX/MIN (8 lanes), INT32 SUM (2 lanes) and XOR on the flits switched from inputs 0 and 1.
+- **Power telemetry:** per-VC occupancy and idle flags drive the UPF 3.0 / CPF power-gating intent in `constraints/`.
 
-## 3. Repository Structure
+Full specification: [`docs/microarchitecture.md`](docs/microarchitecture.md).
 
-```
-micro-nvswitch/
-├── Makefile                     # Master build and execution harness
-├── README.md                    # Project documentation
-├── env_setup.sh                 # Environment setup script
-├── flow/
-│   ├── run_flow.sh              # Open-source ASAP7 flow driver (OpenLane2 container)
-│   ├── asap7_env.sh             # ASAP7 platform paths, cells, clock, thread count
-│   └── fix_spef_delimiter.py    # Fixes OpenROAD-estimated SPEF pin names for OpenSTA
-├── constraints/
-│   ├── router.sdc               # Synopsys Design Constraints (1.25 GHz / 800 ps)
-│   ├── router_openroad.sdc      # OpenROAD/OpenSTA constraints (2.5 ns, see Section 5)
-│   ├── power.upf                # IEEE 1801 UPF 3.0 Low-Power specification
-│   └── power.cpf                # Cadence Common Power Format (CPF)
-├── docs/
-│   ├── microarchitecture.md     # In-depth architectural specification
-│   ├── verification_plan.md     # Verification strategy & test catalog
-│   └── physical_design_guide.md # FinFET PnR & Congestion Management Guide
-├── dv/
-│   ├── cocotb/                  # Cocotb Python verification suite
-│   │   ├── Makefile
-│   │   └── tests/test_router.py # 7 directed and constrained-random tests
-│   └── common/
-│       └── tb_router_top.v      # Self-checking standalone Verilog testbench
-├── rtl/
-│   ├── include/router_pkg.v     # Flit definitions, opcodes, parameters
-│   ├── blocks/
-│   │   ├── vc_buffer.v          # Parameterized VC FIFO with credit return
-│   │   ├── islip_arbiter.v      # Multi-stage iSLIP switch allocator
-│   │   ├── crossbar_8x8.v       # Non-blocking multicast crossbar
-│   │   └── sharp_alu.v          # FP8 (E4M3) in-network reduction ALU
-│   └── top/
-│       └── router_top.v         # Top-level NoC router integration
-├── synth/
-│   ├── yosys/                   # Open-source synthesis (Yosys)
-│   │   ├── scripts/synth.ys     # Generic (technology-independent) synthesis
-│   │   ├── scripts/synth_asap7.tcl  # ASAP7 RVT technology-mapped synthesis
-│   │   ├── mapped/              # Synthesized gate-level netlists (generated)
-│   │   └── reports/             # Area, cell counts, hierarchy checks
-│   ├── genus/                   # Industry synthesis (Cadence Genus)
-│   │   └── scripts/genus.tcl
-│   └── dc/                      # Industry synthesis (Synopsys DC)
-│       └── scripts/dc.tcl
-├── pnr/
-│   ├── openroad/                # Open-source PnR (OpenROAD)
-│   │   ├── scripts/1_floorplan.tcl ... 5_finish.tcl  # Staged ASAP7 flow
-│   │   ├── scripts/4_groute_signoff.tcl  # Low-memory path: stop at global route
-│   │   ├── scripts/gui.tcl      # Opens the layout in the OpenROAD GUI
-│   │   └── reports/             # Per-stage timing/area, CTS, congestion
-│   └── innovus/                 # Industry PnR (Cadence Innovus)
-│       └── scripts/innovus.tcl  # Congestion management, CCOpt, GDSII
-└── signoff/
-    └── sta/
-        ├── sta.tcl              # OpenSTA sign-off (setup/hold/DRV/skew/power)
-        └── reports/             # Sign-off timing and power reports
-```
+## 2. Design Methodology
 
----
+![Flowchart: specification, RTL, Verilator lint, simulation, Yosys synthesis, then OpenROAD floorplan, placement, CTS, global routing and OpenSTA timing/power, each with its measured result. A red feedback loop shows the 800 ps target failing and being relaxed to 2.5 ns. Dashed boxes mark detailed routing, GDSII and the commercial flow as not yet run.](docs/images/design_flow.png)
 
-## 4. Quickstart & Verification
+*Figure 2. Flow from specification to sign-off, with the measured result of each step. Dashed steps are scripted but not yet run.*
 
-### Run RTL Linting (Verilator)
+## 3. Quick Start
+
 ```bash
-make lint
+make lint      # Verilator lint
+make sim       # Icarus Verilog self-checking testbench
+make cocotb    # cocotb regression (14 tests)
+make test      # sim + cocotb
 ```
 
-### Run Standalone Regression Testbench (Icarus Verilog)
-```bash
-make sim
-```
+The ASAP7 flow runs in the `ghcr.io/efabless/openlane2:2.3.10` container, so the host only needs Docker and the ASAP7 platform files:
 
-### Run Cocotb Test Suite
-```bash
-make cocotb
-```
-
-### Run Full Test Suite (Both Standalone & Cocotb)
-```bash
-make test
-```
-
----
-
-## 5. Physical Implementation & The "NVIDIA Signal"
-
-### Open Source Flow (Yosys + OpenROAD + OpenSTA on ASAP7)
-
-The open flow maps the RTL to the **ASAP7 7nm RVT** library and runs floorplan, placement, clock tree synthesis, global routing and OpenSTA sign-off. Every tool runs inside the `ghcr.io/efabless/openlane2:2.3.10` container, so only Docker and the ASAP7 platform files are needed on the host.
-
-**Setup.** Fetch the ASAP7 platform from OpenROAD-flow-scripts. `flow/run_flow.sh` expects it at `~/pdks/orfs/flow/platforms/asap7`; override the location with `PLATFORM_HOST`.
 ```bash
 git clone --depth 1 --filter=blob:none --sparse \
     https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts.git ~/pdks/orfs
 git -C ~/pdks/orfs sparse-checkout set flow/platforms/asap7
+
+flow/run_flow.sh synth floorplan place cts groute sta-groute gui   # low-memory path
+flow/run_flow.sh route finish sta gui                              # needs more RAM
 ```
 
-**Run.** Each stage saves a checkpoint in `build/odb/`, so a later stage can be rerun on its own.
-```bash
-# Synthesis -> floorplan -> place -> CTS -> global route -> STA, then open the GUI
-flow/run_flow.sh synth floorplan place cts groute sta-groute gui
+Each stage saves a checkpoint in `build/odb/`, so later stages can be rerun on their own. Set `PLATFORM_HOST` if ASAP7 lives elsewhere.
 
-# With enough memory for detailed routing (see "Limitations" below)
-flow/run_flow.sh route finish sta gui
-```
+## 4. Verification
 
-#### Results: ASAP7 RVT, typical corner (0.70 V), 2.5 ns clock
+| Suite | Tests | Result |
+|---|---|---|
+| cocotb (`dv/cocotb/tests/test_router.py`) | reset/credits, unicast, multi-flit wormhole, multicast, HoL avoidance, lossless backpressure, SHARP FP8 sum | 7/7 pass |
+| cocotb (`dv/cocotb/tests/test_router_fixes.py`) | body flits follow own header, no output-VC interleave, partial multicast grant, zero-credit multicast, no credit overrun, SHARP needs both operands, random traffic with scoreboard | 7/7 pass |
+| Icarus Verilog (`dv/common/tb_router_top.v`) | reset, unicast, multicast, HoL, SHARP, credits | 6/6 pass |
+
+![Waveform from the Icarus testbench. Unicast: i_flit_valid=01 with dest_mask 10 at 4.5 ns; grant_valid=10 at 6.5 ns; o_flit_valid[4] and packet_id A1 at 7.5 ns. Multicast: i_flit_valid=04 with dest_mask AA at 14.5 ns; grant_valid=AA; o_flit_valid bits 1, 3, 5 and 7 rise together at 17.5 ns with packet_id B2.](docs/images/waveform_unicast_multicast.png)
+
+*Figure 3. Simulation waveform for TEST 2 (unicast port 0 → port 4) and TEST 3 (multicast port 2 → ports 1, 3, 5, 7). Both reach the outputs 3 cycles after injection, and the multicast copies leave in the same cycle. Rendered from the regression VCD.*
+
+Test plan: [`docs/verification_plan.md`](docs/verification_plan.md).
+
+## 5. Synthesis
+
+Yosys 0.46 maps the RTL to the ASAP7 RVT library (`synth/yosys/scripts/synth_asap7.tcl`). `check` reports 0 problems.
+
+| Cell group | Count | Notes |
+|---|---:|---|
+| Flip-flops (`DFFASRHQNx1`) | 18,624 | 16,896 of them are VC buffer storage (8 ports × 4 VCs × 8 entries × 66 bits) |
+| AND-OR / OR-AND complex gates (AO, OA, AOI, OAI) | 34,108 | mostly FIFO read muxes and crossbar selection |
+| NAND / NOR / AND / OR (+1 tie cell) | 26,462 | |
+| Buffers / inverters | 12,768 | |
+| XOR / XNOR / MAJ | 928 | SHARP ALU arithmetic |
+| **Total** | **92,890** | **14,192 µm² cell area, 49.8% sequential** |
+
+The FIFOs are built from flip-flops rather than SRAM macros, so half the area is storage. Reports: [`synth_asap7_stat.rpt`](synth/yosys/reports/synth_asap7_stat.rpt) and [`synth_asap7_check.rpt`](synth/yosys/reports/synth_asap7_check.rpt). A technology-independent run (`make synth TOOL=yosys`) gives 73,159 generic gates with 18,670 flip-flops.
+
+## 6. Physical Design
+
+ASAP7 RVT, typical corner (0.70 V), 2.5 ns clock. Timing and power come from OpenSTA with parasitics estimated from global routes.
 
 | Metric | Value |
 |---|---|
-| Clock target | 2,500 ps (400 MHz) |
-| **Setup WNS / TNS** | **+74 ps / 0 ps** (met) |
-| **Hold WNS / TNS** | **−15 ps / −3,057 ps** (not met, input-port paths) |
-| Achievable Fmax | ~412 MHz |
-| Standard cells (excluding fill/tap) | 115,201 |
-| Flip-flops | 18,624 (`DFFASRHQNx1`) |
-| Cell area / core utilization | 16,531 µm² / 52.5% |
-| Die size | 185.6 µm × 185.6 µm |
+| Setup WNS / TNS | **+74 ps / 0 ps** (met, Fmax ≈ 412 MHz) |
+| Hold WNS / TNS | **−15 ps / −3,057 ps** (not met, input-port paths) |
+| Standard cells (excl. tap/fill) | 115,201 |
+| Cell area / utilization | 16,531 µm² / 52.5% |
 | Clock tree | 2,350 clock buffers, 82.8 ps setup skew |
-| Hold buffers inserted | 6,451 |
-| Global routing | 114,115 nets, 813,577 µm, 22% resource use, 0 overflow |
-| Total power | 142 mW (80% combinational, 14% sequential, 6% clock) |
-
-Timing and power come from OpenSTA with parasitics estimated from global routes (`signoff/sta/reports/`). Per-stage numbers are in `pnr/openroad/reports/`.
+| Hold buffers | 6,451 |
+| Global routing | 114,115 nets, 813,577 µm, 0 overflow |
+| Power | 142 mW (80% combinational, 14% sequential, 6% clock) |
 
 | Stage | Setup WNS | Hold WNS | Utilization |
 |---|---|---|---|
@@ -194,29 +110,48 @@ Timing and power come from OpenSTA with parasitics estimated from global routes 
 | CTS + hold repair | +125 ps | +4.7 ps | 52.8% |
 | Global route | +51 ps | −15 ps | 52.5% |
 
-#### Limitations and open items
-- **The 1.25 GHz target is not met.** At 800 ps the post-placement setup WNS was **−1,604 ps**, so the worst path takes about 2.4 ns. The open-flow constraints in `constraints/router_openroad.sdc` therefore use a 2.5 ns clock, and I/O delays stay at 25% of the period. Reaching 1.25 GHz needs pipelining in the RTL. `constraints/router.sdc` keeps the original 800 ps target for the commercial flow.
-- **No detailed routing or GDSII yet.** Detailed routing was killed for running out of memory on a 3.7 GB WSL host, so the layout stops at global-route guides. The `route`/`finish` stages are scripted and resume from the CTS checkpoint on a machine with more memory.
-- **Hold is not closed after global routing.** The failing paths start at input ports, where the 50 ps minimum input delay is shorter than the clock-tree insertion delay (about 240–280 ps). A larger minimum input delay or a hold-repair pass after global routing would close them.
-- **SPEF workaround.** OpenROAD's `estimate_parasitics -spef_file` writes `*DELIMITER :` in the header but names pins `inst/pin`, so standalone OpenSTA matches no pins and silently drops the wire parasitics. `flow/fix_spef_delimiter.py` rewrites the file during the `groute` stage.
+![Post-CTS placement of the 185.6 µm die with cells colored by function: flip-flops (blue) fill the outer region, combinational logic (grey) is concentrated in the centre, hold-fix buffers (orange) cluster along the left, top and bottom edges, and clock buffers (red) are spread evenly.](docs/images/pd_placement_cts.png)
 
-#### Generic synthesis (technology-independent)
-```bash
-make synth TOOL=yosys
+*Figure 4. Placement after CTS, coloured by cell function. VC-buffer flip-flops fill the outside and the allocator/crossbar logic sits in the centre. Hold buffers bunch up near the I/O edges, which is where the remaining hold violations are.*
+
+![RUDY routing-demand heat map of the die after CTS: mostly blue (low) with a green/yellow region over the central logic and a yellow hotspot at the bottom-edge pins.](docs/images/pd_congestion_rudy.png)
+
+*Figure 5. Estimated routing demand (RUDY). Global routing finished with 0 overflow. Demand is highest over the central logic and the bottom-edge pins.*
+
+![OpenROAD clock-tree view: one root branching through several buffer levels to 18,624 sinks, with sink insertion delays between about 116 and 147 ps.](docs/images/pd_clock_tree.png)
+
+*Figure 6. Clock tree after CTS, plotted by insertion delay.*
+
+**Critical path:** VC state flops → VC eligibility → `req_matrix` → iSLIP grant → crossbar input mux → output register. VC selection, switch allocation and the crossbar all happen in one cycle, which is why the 800 ps target missed by 1.6 ns.
+
+Reports: [`signoff/sta/reports/`](signoff/sta/reports/) (setup, hold, DRV, skew, power) and [`pnr/openroad/reports/`](pnr/openroad/reports/) (per-stage summaries, congestion, CTS).
+
+### Limitations
+
+- **1.25 GHz is not met.** At 800 ps the post-placement setup WNS was −1,604 ps. The open flow uses a 2.5 ns clock (`constraints/router_openroad.sdc`). Reaching 1.25 GHz needs a pipeline register between switch allocation and the crossbar. `constraints/router.sdc` keeps the 800 ps target.
+- **No detailed routing or GDSII yet.** Detailed routing ran out of memory on a 3.7 GB WSL host. The `route` and `finish` stages are scripted and resume from the CTS checkpoint.
+- **Hold is open after global routing.** The 50 ps minimum input delay is shorter than the 240–280 ps clock insertion delay. A larger input delay or a post-route hold-repair pass should close it.
+- **SPEF workaround.** OpenROAD writes `*DELIMITER :` but names pins `inst/pin`, so OpenSTA silently drops the parasitics. `flow/fix_spef_delimiter.py` rewrites the file.
+- **Commercial flow not run.** Genus, Design Compiler and Innovus scripts are included but untested (no licences).
+
+## 7. Repository Structure
+
 ```
-This produces 73,159 Yosys generic gates (not library cells), including 18,670 flip-flops, with 0 problems reported by `check`.
-
-### Industry Translation Flow (Cadence Genus + Innovus)
-Push design to $F_{max}$ on the **ASAP7 7nm FinFET PDK**:
-```bash
-make synth TOOL=genus
-make pnr TOOL=innovus
+micro-nvswitch-noc-router/
+├── rtl/            Verilog RTL: router_pkg.v, vc_buffer, islip_arbiter, crossbar_8x8, sharp_alu, router_top
+├── dv/             Icarus testbench (common/) and cocotb suite (cocotb/)
+├── constraints/    SDC (800 ps and 2.5 ns), UPF 3.0, CPF
+├── synth/          Yosys (generic + ASAP7), Genus and DC scripts, synthesis reports
+├── pnr/            OpenROAD staged flow + reports, Innovus script
+├── signoff/sta/    OpenSTA sign-off script and reports
+├── flow/           run_flow.sh container driver, ASAP7 settings, SPEF fix
+└── docs/           Microarchitecture, verification plan, PD guide, figures
 ```
 
-### Physical Design Highlights:
-- **Wire-Dominated Floorplan:** SRAM / VC buffer macros arranged at the periphery; switch allocator and crossbar centered at `(100 um, 100 um)` to minimize wire flight time.
-- **Congestion Management:** 
-  - 65% partial placement blockage in the core center to resolve pin density explosion.
-  - Cell padding of 1 site pitch on arbiter standard cells.
-  - Layer promotion of 512 crossbar distribution nets to **Metal 4 through Metal 8** (42% RC delay reduction).
-- **Power Optimization:** IEEE 1801 UPF 3.0 script implements power gating of idle virtual channels, yielding up to **68% dynamic and leakage power reduction** during burst idle intervals.
+## 8. Releases
+
+| Version | Date | Contents |
+|---|---|---|
+| [v0.1.0](https://github.com/Srijit6/micro-nvswitch-noc-router/releases/tag/v0.1.0) | 2026-11-08 | Verified RTL (14/14 cocotb), ASAP7 synthesis, OpenROAD placement, CTS and global routing, OpenSTA sign-off at 2.5 ns |
+
+Planned for v1.0.0: detailed routing, GDSII with DRC/LVS, hold closure, and a pipelined allocator to target 1.25 GHz.
