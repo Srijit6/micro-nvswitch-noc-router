@@ -159,3 +159,7 @@ Planned for v1.0.0: detailed routing, GDSII with DRC/LVS, hold closure, and a pi
 6. W. J. Dally and B. Towles, *Principles and Practices of Interconnection Networks*, Morgan Kaufmann, 2004. Background for virtual channels, credit-based flow control and wormhole switching.
 
 Tools: [Yosys](https://github.com/YosysHQ/yosys), [OpenROAD](https://github.com/The-OpenROAD-Project/OpenROAD), [OpenSTA](https://github.com/parallaxsw/OpenSTA), [Verilator](https://github.com/verilator/verilator), [Icarus Verilog](https://github.com/steveicarus/iverilog), [cocotb](https://github.com/cocotb/cocotb), and the [OpenLane 2](https://github.com/efabless/openlane2) container. All figures were generated from this repository's own simulation and layout data.
+
+## License
+
+MIT, see [`LICENSE`](LICENSE). The license covers this repository's own files only. ASAP7 platform files and the tools listed above keep their own licenses.
